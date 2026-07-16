@@ -49,6 +49,13 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .status .gear{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;
   border:1px solid var(--line);background:var(--card);}
 .status .gear svg{width:17px;height:17px;}
+.status .right{display:flex;align-items:center;gap:8px;}
+.backbtn{display:flex;align-items:center;gap:3px;font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--accent-d);padding:5px 10px 5px 4px;border-radius:12px;margin-left:-4px;}
+.backbtn svg{width:19px;height:19px;}
+.backbtn:active{background:var(--card2);}
+.streakpin{display:flex;align-items:center;gap:3px;height:34px;padding:0 11px;border-radius:17px;border:1px solid var(--line);background:var(--card);font-family:var(--serif);font-size:15px;font-weight:500;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:0;text-transform:none;}
+.streakpin .fl{font-size:14px;line-height:1;}
+.streakpin:active{transform:scale(.95);}
 .greet{padding:6px 2px 16px;}
 .greet .g1{font-family:var(--serif);font-size:30px;font-weight:500;letter-spacing:-.3px;color:var(--ink);line-height:1.1;}
 .greet .g2{font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--accent);margin-top:8px;}
@@ -107,7 +114,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 /* nav */
 .nav{position:absolute;bottom:0;left:0;right:0;height:78px;padding-bottom:18px;background:rgba(249,242,227,.86);
   backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-top:1px solid var(--line);display:flex;align-items:center;}
-.nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:9.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--faint);}
+.nav button{flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;font-size:9px;font-weight:700;letter-spacing:.2px;text-transform:uppercase;color:var(--faint);white-space:nowrap;}
 .nav button svg{width:23px;height:23px;}
 .nav button.on{color:var(--espresso);}
 .fab{position:absolute;bottom:92px;right:16px;width:62px;height:62px;border-radius:50%;z-index:20;
@@ -217,6 +224,7 @@ textarea{width:100%;min-height:100px;padding:15px;border-radius:14px;border:1px 
 <g id="ic-plate"><circle cx="12" cy="12" r="7" fill="none" stroke="#6d6b52" stroke-width="1.7"/><circle cx="12" cy="12" r="3" fill="none" stroke="#6d6b52" stroke-width="1.5"/></g>
 <g id="ic-send"><path d="M4 12l16-7-7 16-2-7z" fill="none" stroke="#f3ede3" stroke-width="1.7" stroke-linejoin="round"/></g>
 <g id="ic-plus"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></g>
+<g id="ic-back"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></g>
 <g id="ic-gear"><circle cx="12" cy="12" r="3" fill="none" stroke="#7d6252" stroke-width="1.6"/><path d="M12 3.5v2.2M12 18.3v2.2M20.5 12h-2.2M5.7 12H3.5M18 6l-1.6 1.6M7.6 16.4L6 18M18 18l-1.6-1.6M7.6 7.6L6 6" stroke="#7d6252" stroke-width="1.5" stroke-linecap="round"/></g>
 <g id="ic-plan"><rect x="4.5" y="5.5" width="15" height="14" rx="3" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M4.5 9.5h15M8.5 3.5v3M15.5 3.5v3" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/><path d="M8.7 14.2l2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></g>
 <g id="ic-more"><rect x="4.5" y="4.5" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="4.5" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="4.5" y="13.5" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/><rect x="13.5" y="13.5" width="6" height="6" rx="1.6" fill="none" stroke="currentColor" stroke-width="1.7"/></g>
@@ -360,6 +368,7 @@ textarea{width:100%;min-height:100px;padding:15px;border-radius:14px;border:1px 
     <button data-t="journey" onclick="go('journey')"><svg viewBox="0 0 24 24"><use href="#ic-journey"/></svg>Journey</button>
     <button data-t="baby" onclick="go('baby')"><svg viewBox="0 0 24 24"><use href="#ic-baby"/></svg>Baby</button>
     <button data-t="plan" onclick="go('plan')"><svg viewBox="0 0 24 24"><use href="#ic-plan"/></svg>Plan</button>
+    <button data-t="calendar" onclick="go('calendar')"><svg viewBox="0 0 24 24"><use href="#ic-cal"/></svg>Calendar</button>
     <button data-t="more" onclick="go('more')"><svg viewBox="0 0 24 24"><use href="#ic-more"/></svg>More</button>
   </div>
 
@@ -679,7 +688,10 @@ function progressArt(pct){
     +'</svg>';
 }
 function triBar(pct){return '<div style="height:9px;border-radius:5px;background:var(--line);overflow:hidden"><div style="height:100%;width:'+pct+'%;background:linear-gradient(90deg,var(--peach),var(--accent));border-radius:5px;transition:width .5s cubic-bezier(.3,.9,.4,1)"></div></div>';}
-function go(t){TAB=t;document.querySelectorAll('#nav button').forEach(function(b){b.classList.toggle('on',b.dataset.t===t)});document.getElementById('view').scrollTop=0;render();}
+var HIST=[];
+var PRIMARY={home:1,journey:1,baby:1,plan:1,calendar:1,more:1};
+function go(t,isBack){if(!isBack&&t!==TAB){HIST.push(TAB);if(HIST.length>25)HIST.shift();}if(t==='safe')SAFECAT=null;TAB=t;document.querySelectorAll('#nav button').forEach(function(b){b.classList.toggle('on',b.dataset.t===t)});document.getElementById('view').scrollTop=0;render();}
+function goBack(){var p=HIST.pop();go(p||'more',true);}
 function ring(pct,color){var r=16,c=2*Math.PI*r,off=c*(1-pct);
   return '<svg width="58" height="58" viewBox="0 0 40 40"><circle cx="20" cy="20" r="16" fill="none" stroke="#e0d6c8" stroke-width="4"/><circle cx="20" cy="20" r="16" fill="none" stroke="'+color+'" stroke-width="4" stroke-dasharray="'+c+'" stroke-dashoffset="'+off+'" stroke-linecap="round" transform="rotate(-90 20 20)"/></svg>';}
 function esc(s){return (s||'').replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -704,14 +716,31 @@ function render(){
   else if(TAB==='contractions')v.innerHTML=vContractions();
   else if(TAB==='calendar')v.innerHTML=vCalendar();
   else if(TAB==='birth')v.innerHTML=vBirth();
+  else if(TAB==='hospbag')v.innerHTML=vHospBag();
+  else if(TAB==='food')v.innerHTML=vFood();
   else if(TAB==='gender')v.innerHTML=vGender();
 }
 
 function statusBar(){
-  return '<div class="status"><span>'+new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})+'</span>'
-    +'<button class="gear" onclick="openSettings()"><svg viewBox="0 0 24 24"><use href="#ic-gear"/></svg></button></div>';
+  var left=PRIMARY[TAB]
+    ? '<span>'+new Date().toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})+'</span>'
+    : '<button class="backbtn" onclick="goBack()"><svg viewBox="0 0 24 24"><use href="#ic-back"/></svg>Back</button>';
+  var st=streakCount();
+  var pin='<button class="streakpin" onclick="go(\'home\')" aria-label="Check-in streak"><span class="fl">🔥</span>'+st+'</button>';
+  return '<div class="status">'+left+'<div class="right">'+pin
+    +'<button class="gear" onclick="openSettings()"><svg viewBox="0 0 24 24"><use href="#ic-gear"/></svg></button></div></div>';
 }
 
+function bumpBody(p){var BX=(60+46*p).toFixed(1);
+  return 'M40 135 L40 44 C40 34 44 30 52 30 C60 31 62 38 61 45 C60 52 56 55 56 60 C56 70 '+BX+' 74 '+BX+' 92 C'+BX+' 106 60 118 56 126 C52 132 46 135 40 135 Z';}
+function bumpSilhouette(w,size){size=size||150;var p=Math.max(0,Math.min(1,(w-4)/36));
+  return '<svg viewBox="0 0 120 150" style="width:'+size+'px;height:'+Math.round(size*150/120)+'px;display:block">'
+    +'<defs><linearGradient id="bmpG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e7c29c"/><stop offset="1" stop-color="#c99a6f"/></linearGradient></defs>'
+    +'<path d="'+bumpBody(1)+'" fill="none" stroke="#c1a982" stroke-width="1.3" stroke-dasharray="2.5 4" opacity=".65"/>'
+    +'<circle cx="50" cy="18" r="12" fill="none" stroke="#c1a982" stroke-width="1.3" stroke-dasharray="2.5 4" opacity=".65"/>'
+    +'<path d="'+bumpBody(p)+'" fill="url(#bmpG)" stroke="#a97e50" stroke-width="1.6" stroke-linejoin="round"/>'
+    +'<circle cx="50" cy="18" r="12" fill="url(#bmpG)" stroke="#a97e50" stroke-width="1.6"/>'
+    +'</svg>';}
 function vHome(){
   var g=daysToGo(),w=week(),b=babyData(),ts=todayState();
   var name=youName();
@@ -770,27 +799,32 @@ function vHome(){
   var waterSec='<div class="card" id="waterSec"><div class="row" style="justify-content:space-between;align-items:flex-start"><div><div class="hd" style="margin:0">Water</div><small style="font-size:12px;color:var(--muted);font-weight:500">'+wc+' of 8 glasses today'+(doneW?" · you're hydrated 💧":'')+'</small></div>'
     +'<button onclick="event.stopPropagation();addWater()" style="padding:9px 15px;border-radius:12px;background:var(--espresso);color:#f3ede3;font-size:11.5px;font-weight:700;letter-spacing:.7px;text-transform:uppercase">+ Glass</button></div>'
     +'<div class="wtr">'+glasses+'</div></div>';
-  // mood — its own section
-  var moodSec='<div class="card" id="moodSec"><div class="hd" style="margin-bottom:2px">How are you feeling?</div><small style="font-size:12px;color:var(--muted);font-weight:500">'+(ts.mood?"You're feeling "+ts.mood+' today':'Tap one to log your mood')+'</small><div class="moodpick">'
-    +['rough','meh','okay','good','great'].map(function(m,i){var e=['😣','😕','🙂','😊','🥰'][i];return '<button class="'+(ts.mood===m?'on':'')+'" onclick="setMood(\''+m+'\')">'+e+'</button>';}).join('')+'</div></div>';
+  // mood is now merged into the combined "How are you today?" card below
+  var moodSec='';
   // this week's focus (clickable → detail)
   var focus=weeklyFocus(w);
   var foc='<div class="card" onclick="openWeekFocus()"><div class="row"><div class="chip rs"><svg viewBox="0 0 24 24"><use href="#ic-sun"/></svg></div><div class="tx"><b>This week\'s focus</b><small>'+focus+'</small></div>'+chev+'</div></div>';
   // partner note
   var dad=DAD[(daysPreg()||0)%DAD.length];
-  var pnote='<div class="card"><div class="row"><div class="chip bt"><svg viewBox="0 0 24 24"><use href="#ic-heart"/></svg></div><div class="tx">For '+esc(dadLabel())+'<small>'+dad+'</small></div></div></div>';
+  var pnote='<div class="card" onclick="openForYou()"><div class="row"><div class="chip bt"><svg viewBox="0 0 24 24"><use href="#ic-heart"/></svg></div><div class="tx">For '+esc(dadLabel())+'<small>'+dad+'</small></div>'+chev+'</div></div>';
   // check-in streak (derived from S.days)
   var streak=streakCount();
   var streakCard='<div class="card"><div class="row"><div class="chip bt"><svg viewBox="0 0 24 24"><use href="#ic-flame"/></svg></div><div class="tx">Check-in streak<small>'+(streak?'Nicely done — keep it going today':'Log water, a mood or a step to begin')+'</small></div><div style="font-family:var(--serif);font-size:30px;font-weight:500;color:var(--ink);display:flex;align-items:center;gap:4px;font-variant-numeric:tabular-nums">🔥'+streak+'</div></div></div>';
   // daily verse
   var vs=verseOfDay();
   var verse='<div class="card" style="text-align:center;padding:24px 22px"><div style="font-size:10.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent)">Verse for today</div><div style="font-family:var(--serif);font-size:19px;line-height:1.5;color:var(--ink);margin:14px 0 12px;font-style:italic">“'+esc(vs.t)+'”</div><div style="font-size:11px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent-d)">'+esc(vs.ref)+'</div></div>';
-  // today's check-in (symptom + concern)
+  // today — mood + check-in merged into one daily card
   var symp=(ts.symptom||'').trim(),conc=(ts.concern||'').trim();
-  var checkin='<div class="card" onclick="openCheckin()"><div class="row"><div class="chip rs"><svg viewBox="0 0 24 24"><use href="#ic-mood" stroke="#7d6252"/></svg></div><div class="tx">Today\'s check-in<small>'+((symp||conc)?'Tap to view or edit today\'s note':'How\'s your body? Anything on your mind?')+'</small></div>'+((symp||conc)?'<span class="pill" style="background:var(--card2);color:var(--accent-d)">Edit</span>':chev)+'</div>';
+  var moodBtns=['rough','meh','okay','good','great'].map(function(m,i){var e=['😣','😕','🙂','😊','🥰'][i];return '<button class="'+(ts.mood===m?'on':'')+'" onclick="setMood(\''+m+'\')">'+e+'</button>';}).join('');
+  var checkin='<div class="card">'
+    +'<div class="hd" style="margin-bottom:2px">How are you today?</div>'
+    +'<small style="font-size:12px;color:var(--muted);font-weight:500">'+(ts.mood?'Feeling '+ts.mood+' today':'Tap how you\'re feeling')+'</small>'
+    +'<div class="moodpick" style="margin-top:11px">'+moodBtns+'</div>'
+    +'<div class="divider"></div>'
+    +'<div onclick="openCheckin()"><div class="row"><div class="chip rs"><svg viewBox="0 0 24 24"><use href="#ic-mood" stroke="#7d6252"/></svg></div><div class="tx">Today\'s check-in<small>'+((symp||conc)?'Tap to view or edit today\'s note':'How\'s your body? Anything on your mind?')+'</small></div>'+((symp||conc)?'<span class="pill" style="background:var(--card2);color:var(--accent-d)">Edit</span>':chev)+'</div>';
   if(symp)checkin+='<div style="margin-top:13px"><div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--faint)">Your body</div><div style="font-size:13.5px;color:var(--ink2);font-weight:500;line-height:1.55;margin-top:4px">'+esc(symp)+'</div></div>';
   if(conc)checkin+='<div style="margin-top:11px"><div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--faint)">On your mind</div><div style="font-size:13.5px;color:var(--ink2);font-weight:500;line-height:1.55;margin-top:4px">'+esc(conc)+'</div></div>';
-  checkin+='</div>';
+  checkin+='</div></div>';
   // lesson of the day
   var les=lessonOfDay();
   var lesson='<div class="card" onclick="openLesson()"><div style="font-size:10.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent)">Lesson of the day</div><div class="hd" style="margin-top:8px">'+esc(les.t)+'</div><div style="font-size:14px;color:var(--ink2);line-height:1.6;font-weight:500;letter-spacing:.1px;margin-top:4px">'+esc(les.b)+'</div><div style="margin-top:11px;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--accent-d)">Read more ›</div></div>';
@@ -800,7 +834,11 @@ function vHome(){
     var hasBump=(S.photos||[]).some(function(p){return p.kind==='bump'&&p.week===w;});
     if(!hasBump)bumpRem='<div class="card" onclick="pickPhoto(\'bump\')" style="background:linear-gradient(155deg,#f7eee0,#efe0c6)"><div class="row"><div class="chip pk"><svg viewBox="0 0 24 24"><use href="#ic-camera"/></svg></div><div class="tx"><b>This week\'s bump photo</b><small>Snap one to watch '+esc(babyLabel().toLowerCase()==='baby'?'baby':babyLabel())+' grow — week '+w+'</small></div>'+chev+'</div></div>';
   }
-  return head+hero+tiles+bumpRem+streakCard+tl+waterSec+moodSec+checkin+lesson+foc+pnote+verse;
+  var bumpCard='';
+  if(S.phase!=='born'){bumpCard='<div class="card" style="text-align:center"><div style="font-size:10.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent)">Your bump · week '+w+'</div>'
+    +'<div style="display:flex;justify-content:center;margin:12px 0 6px">'+bumpSilhouette(w,138)+'</div>'
+    +'<div style="font-size:12.5px;color:var(--muted);font-weight:500;line-height:1.5">A little rounder each week — the dotted outline is full term 💛</div></div>';}
+  return head+hero+tiles+bumpCard+bumpRem+streakCard+tl+waterSec+moodSec+checkin+lesson+foc+pnote+verse;
 }
 function openBabyWeek(){var w=week()||6;var b=W[Math.min(40,Math.max(4,w))];var devs=devFor(w)||[];
   var h='<div style="font-size:10.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Your baby · week '+w+'</div>';
@@ -872,6 +910,14 @@ function openWeekFocus(){var w=week()||6;var d=weekFocusDetail(w);
   h+='<div class="sheet-title" style="margin-top:0">'+esc(d.title)+'</div>';
   h+='<div style="font-size:14px;color:var(--ink2);font-weight:500;line-height:1.55;margin-bottom:16px">'+esc(d.sub)+'</div>';
   d.items.forEach(function(it){h+='<div class="row" style="padding:11px 0;border-top:1px solid var(--line2)"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none"></span><div class="tx" style="font-weight:500">'+esc(it)+'</div></div>';});
+  openSheet(h);
+}
+function openForYou(){var lab=dadLabel();var start=(daysPreg()||0)%DAD.length;
+  var h='<div style="font-size:10.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);margin-bottom:6px">For '+esc(lab)+'</div>';
+  h+='<div class="sheet-title" style="margin-top:0">Showing up, together 💛</div>';
+  h+='<div class="mem" style="margin-bottom:14px"><div class="mt">Today</div><div class="mc">'+esc(DAD[start])+'</div></div>';
+  h+='<div class="sec-label" style="margin-top:4px">A few more little ways to be there</div>';
+  for(var i=1;i<=4;i++){var idx=(start+i)%DAD.length;h+='<div class="mem"><div class="mc">'+esc(DAD[idx])+'</div></div>';}
   openSheet(h);
 }
 
@@ -986,8 +1032,36 @@ function vBaby(){
       else{out+='<div onclick="openScan(\''+p.id+'\')" style="cursor:pointer"><img src="'+p.data+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;border:1px solid var(--line);display:block"><div style="font-size:10.5px;font-weight:700;letter-spacing:.4px;color:var(--muted);margin-top:6px;text-align:center;text-transform:uppercase">Week '+p.week+(p.date?' · '+new Date(p.date+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}):'')+'</div></div>';}
     });
     out+='</div>';}
+  // bump photos — grouped by week, live here under Baby too
+  out+='<div class="sec-label">Bump photos</div>';
+  out+='<button class="btn ghost" onclick="pickPhoto(\'bump\')" style="margin-bottom:13px">Add this week\'s bump photo</button>';
+  var bwB=bumpWeeks();var bwks=Object.keys(bwB).map(Number).sort(function(a,b){return b-a;}).slice(0,4);
+  if(!bwks.length)out+='<div class="empty" style="padding:16px 12px">No bump photos yet — snap one to start your timeline.</div>';
+  else{out+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">';
+    bwks.forEach(function(wk){var arr=bwB[wk];var cover=arr[arr.length-1];
+      out+='<div onclick="openBumpWeek('+wk+')" style="cursor:pointer;position:relative"><img src="'+cover.data+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:16px;border:1px solid var(--line);display:block">'+(arr.length>1?'<div style="position:absolute;right:8px;top:8px;background:var(--espresso);color:#f3ede3;font-size:11px;font-weight:700;border-radius:10px;padding:2px 7px">'+arr.length+'</div>':'')+'<div style="font-size:10.5px;font-weight:700;letter-spacing:.4px;color:var(--muted);margin-top:6px;text-align:center;text-transform:uppercase">Week '+wk+'</div></div>';});
+    out+='</div><div style="text-align:center;margin-top:10px"><button onclick="go(\'photos\')" style="font-size:12px;font-weight:700;letter-spacing:.5px;color:var(--accent-d);text-transform:uppercase">See full timeline ›</button></div>';}
+  // measurements — from scans
+  out+='<div class="sec-label">Measurements</div>';
+  out+='<button class="btn ghost" onclick="openMeasure()" style="margin-bottom:13px">Add a measurement</button>';
+  var ms=(S.measures||[]).slice().sort(function(a,b){return (a.week||0)-(b.week||0);});
+  if(!ms.length)out+='<div class="empty" style="padding:16px 12px">Log baby\'s weight and length from each scan to watch the growth.</div>';
+  else ms.forEach(function(m){out+='<div class="card" style="padding:14px 16px"><div class="row"><div class="chip bl"><svg viewBox="0 0 24 24"><use href="#ic-target"/></svg></div><div class="tx"><b>Week '+m.week+'</b><small>'+([(m.weight?m.weight+' g':''),(m.length?m.length+' cm':'')].filter(Boolean).join(' · ')||'logged')+(m.note?' · '+esc(m.note):'')+'</small></div><button onclick="event.stopPropagation();delMeasure(\''+m.id+'\')" style="color:var(--faint);font-size:20px;padding:0 4px">×</button></div></div>';});
   return out;
 }
+function openMeasure(){var w=week()||0;
+  var h='<div class="sheet-title">Add a measurement</div><div style="font-size:13px;color:var(--muted);font-weight:500;margin-bottom:14px;line-height:1.5">From your scan — pop in whatever they gave you 💛</div>';
+  h+='<div class="lbl">Week</div><input class="fld" id="msWk" type="number" inputmode="numeric" value="'+w+'">';
+  h+='<div class="lbl" style="margin-top:12px">Estimated weight (grams)</div><input class="fld" id="msWt" type="number" inputmode="numeric" placeholder="e.g. 300">';
+  h+='<div class="lbl" style="margin-top:12px">Length (cm)</div><input class="fld" id="msLn" type="number" inputmode="decimal" step="0.1" placeholder="e.g. 25">';
+  h+='<div class="lbl" style="margin-top:12px">Note <span style="text-transform:none;letter-spacing:0;color:var(--faint)">(optional)</span></div><input class="fld" id="msNote" placeholder="e.g. head down, all healthy">';
+  h+='<button class="btn" style="margin-top:16px" onclick="saveMeasure()">Save</button>';
+  openSheet(h);
+}
+function saveMeasure(){var wk=parseInt(document.getElementById('msWk').value,10);if(isNaN(wk))wk=week()||0;var wt=parseInt(document.getElementById('msWt').value,10);var ln=parseFloat(document.getElementById('msLn').value);var note=document.getElementById('msNote').value.trim();
+  if(isNaN(wt)&&isNaN(ln)&&!note){alert('Add a weight, length or note 💛');return;}
+  S.measures=S.measures||[];S.measures.push({id:'m'+Date.now(),week:wk,weight:(isNaN(wt)?null:wt),length:(isNaN(ln)?null:ln),note:note});save();closeSheet();render();}
+function delMeasure(id){S.measures=(S.measures||[]).filter(function(m){return m.id!==id;});save();render();}
 /* standard scan/appointment schedule */
 var SCANS=[
  {wk:9,type:'Dating scan',note:'Confirms your due date and heartbeat'},
@@ -1136,11 +1210,27 @@ var SAFE=[
    {n:'Shellfish / prawns',s:0,note:'Fine when thoroughly cooked. Avoid raw oysters.'},
    {n:'Herbal teas',s:1,note:'Most are fine in moderation, but check the specific herb — some aren\'t recommended.'},
    {n:'Artificial sweeteners',s:1,note:'Most (like aspartame, sucralose) are considered fine in moderation.'},
-   {n:'Raw bean sprouts',s:1,note:'Cook them first — raw sprouts can carry bacteria.'}
+   {n:'Raw bean sprouts',s:1,note:'Cook them first — raw sprouts can carry bacteria.'},
+   {n:'Fish (oily & white)',s:0,note:'Great for baby — aim for about 2 portions a week. Cook it through; only raw fish is a no.'},
+   {n:'Tuna',s:1,note:'Fine but limit it — roughly 2 tins or 1 fresh steak a week — as it carries more mercury.'},
+   {n:'Cooked meat & chicken',s:0,note:'Lovely protein — just cook it right through, no pink in the middle.'},
+   {n:'Cured meat (biltong, salami, ham)',s:2,note:'Best avoided — small toxoplasmosis and listeria risk. Cooked ham that\'s steaming hot is okay.'},
+   {n:'Ice cream',s:0,note:'Shop-bought tubs and sticks are fine. Just be a little wary of soft-serve from machines that aren\'t kept clean.'},
+   {n:'Honey',s:0,note:'Safe for you (never for a baby under one year old, though).'},
+   {n:'Fruit & veg',s:0,note:'Exactly what you want — just wash everything well. And pineapple won\'t start labour, that\'s a myth.'}
+ ]},
+ {c:'Sex & intimacy',items:[
+   {n:'Sex (in general)',s:0,note:'Safe in a normal, healthy pregnancy — baby is well cushioned by fluid and muscle. Skip it only if your midwife has advised against it (e.g. bleeding, a low-lying placenta, or your waters have broken).'},
+   {n:'Oral sex',s:0,note:'Safe. One rule: a partner should never blow air into the vagina — very rarely that can cause a dangerous air bubble. Everything else is fine.'},
+   {n:'Doggy style / from behind',s:0,note:'Totally fine, and often more comfortable as the bump grows — there\'s no pressure on your belly.'},
+   {n:'On top / side-lying',s:0,note:'Great later on — you control the depth and there\'s no weight on the bump.'},
+   {n:'Lying flat on your back',s:1,note:'Fine early on, but from around 20 weeks don\'t stay flat on your back for long — prop up with pillows or switch positions.'},
+   {n:'Orgasm',s:0,note:'Safe — you might feel some mild tightening (Braxton Hicks) afterwards, which is normal and settles.'},
+   {n:'Sex toys',s:0,note:'Fine — just keep them clean. Avoid using them if your waters have broken.'},
+   {n:'Semen / sperm',s:0,note:'Harmless to baby. Near your due date it can even help soften the cervix, which is perfectly fine.'}
  ]},
  {c:'Activities & lifestyle',items:[
    {n:'Exercise',s:0,note:'Brilliant for you — walking, swimming and prenatal yoga are ideal. Avoid contact sports and fall risks.'},
-   {n:'Sex',s:0,note:'Safe in a normal, healthy pregnancy — baby is well cushioned.'},
    {n:'Massage',s:0,note:'Lovely and safe — use a pregnancy-trained therapist, especially later on.'},
    {n:'Flying',s:1,note:'Usually fine up to ~36 weeks. Move around, hydrate, and carry your notes.'},
    {n:'Warm bath',s:1,note:'A warm bath is fine and soothing — just avoid very hot water.'},
@@ -1175,20 +1265,75 @@ function safeIcon(s,sz){sz=sz||20;var c=['#7f9a54','#cf9a3a','#c56a5a'][s];
   if(s===0)return '<svg viewBox="0 0 24 24" style="width:'+sz+'px;height:'+sz+'px"><circle cx="12" cy="12" r="8.5" fill="none" stroke="'+c+'" stroke-width="2.4"/></svg>';
   if(s===1)return '<svg viewBox="0 0 24 24" style="width:'+sz+'px;height:'+sz+'px"><path d="M12 3.5L21 20H3z" fill="none" stroke="'+c+'" stroke-width="2.2" stroke-linejoin="round"/></svg>';
   return '<svg viewBox="0 0 24 24" style="width:'+sz+'px;height:'+sz+'px"><circle cx="12" cy="12" r="8.5" fill="none" stroke="'+c+'" stroke-width="2.4"/><path d="M7.5 7.5l9 9" stroke="'+c+'" stroke-width="2.4" stroke-linecap="round"/></svg>';}
+var SAFECAT=null;
+var SAFECHIP=['bt','rs','sg','lv','bl'];
+var SAFEIC=['ic-plate','ic-heart','ic-foot','ic-sparkle','ic-doc'];
+function openSafeCat(i){SAFECAT=i;var v=document.getElementById('view');if(v)v.scrollTop=0;render();}
+function closeSafeCat(){SAFECAT=null;var v=document.getElementById('view');if(v)v.scrollTop=0;render();}
+function safeLegend(){return '<div style="display:flex;gap:16px;justify-content:center;margin:0 0 14px;font-size:11.5px;font-weight:600;color:var(--muted)">'+[0,1,2].map(function(s){return '<span style="display:flex;align-items:center;gap:6px">'+safeIcon(s,16)+SAFELBL[s]+'</span>';}).join('')+'</div>';}
 function vSafe(){
   var out=statusBar()+'<div class="greet"><div class="g1">Is it safe?</div><div class="g2">Quick pregnancy checks</div></div>';
-  out+='<div style="display:flex;gap:16px;justify-content:center;margin:0 0 14px;font-size:11.5px;font-weight:600;color:var(--muted)">'+[0,1,2].map(function(s){return '<span style="display:flex;align-items:center;gap:6px">'+safeIcon(s,16)+SAFELBL[s]+'</span>';}).join('')+'</div>';
-  out+='<div style="font-size:12.5px;color:var(--muted);font-weight:500;text-align:center;margin-bottom:12px;line-height:1.5">A quick guide — always check anything you\'re unsure about with your midwife 💛</div>';
-  SAFE.forEach(function(g){
-    out+='<div class="sec-label">'+esc(g.c)+'</div><div class="card" style="padding:2px 14px">';
-    var items=g.items.slice().sort(function(a,b){return a.s-b.s;});
-    items.forEach(function(it,i){
-      out+='<div onclick="openSafe(\''+g.c.replace(/'/g,"\\'")+'\',\''+it.n.replace(/'/g,"\\'")+'\')" style="display:flex;align-items:center;gap:12px;padding:13px 4px;'+(i<items.length-1?'border-bottom:1px solid var(--line2);':'')+'"><div class="tx" style="flex:1;font-size:14.5px;color:var(--ink2);font-weight:600">'+esc(it.n)+'</div>'+safeIcon(it.s,22)+'</div>';
+  if(SAFECAT===null){
+    out+=safeLegend();
+    out+='<div style="font-size:12.5px;color:var(--muted);font-weight:500;text-align:center;margin-bottom:14px;line-height:1.5">Pick a topic to see the specifics — always check anything you\'re unsure about with your midwife 💛</div>';
+    SAFE.forEach(function(g,gi){
+      var counts=[0,0,0];g.items.forEach(function(it){counts[it.s]++;});
+      out+='<div class="card" onclick="openSafeCat('+gi+')" style="cursor:pointer"><div class="row"><div class="chip '+(SAFECHIP[gi%SAFECHIP.length])+'"><svg viewBox="0 0 24 24"><use href="#'+(SAFEIC[gi%SAFEIC.length])+'"/></svg></div><div class="tx"><b>'+esc(g.c)+'</b><small>'+g.items.length+' things to check</small></div>'+chev+'</div></div>';
+    });
+    return out;
+  }
+  var g=SAFE[SAFECAT];if(!g){SAFECAT=null;return vSafe();}
+  out+='<button class="backbtn" style="margin:0 0 10px" onclick="closeSafeCat()"><svg viewBox="0 0 24 24"><use href="#ic-back"/></svg>All topics</button>';
+  out+='<div class="sec-label" style="margin-top:0">'+esc(g.c)+'</div>';
+  out+=safeLegend();
+  out+='<div class="card" style="padding:2px 14px">';
+  var items=g.items.slice().sort(function(a,b){return a.s-b.s;});
+  items.forEach(function(it,i){
+    out+='<div onclick="openSafe(\''+g.c.replace(/'/g,"\\'")+'\',\''+it.n.replace(/'/g,"\\'")+'\')" style="display:flex;align-items:center;gap:12px;padding:13px 4px;'+(i<items.length-1?'border-bottom:1px solid var(--line2);':'')+'"><div class="tx" style="flex:1;font-size:14.5px;color:var(--ink2);font-weight:600">'+esc(it.n)+'</div>'+safeIcon(it.s,22)+chev+'</div>';
+  });
+  out+='</div>';
+  return out;
+}
+/* ---------------- downloads (printable checklists / plan) ---------------- */
+function downloadDoc(filename,title,body){
+  var css='body{font-family:Georgia,\'Times New Roman\',serif;color:#2f2820;max-width:640px;margin:34px auto;padding:0 26px;line-height:1.5}h1{font-size:27px;margin:0 0 3px}.sub{color:#976748;font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:24px}h2{font-size:16px;margin:24px 0 8px;color:#976748}ul{list-style:none;padding:0;margin:0}li{padding:8px 0;border-bottom:1px solid #eadfce;font-size:15px;display:flex;gap:11px;align-items:flex-start}.box{width:16px;height:16px;border:1.6px solid #b3835e;border-radius:4px;flex:none;margin-top:2px}p.note{color:#57493a;font-size:15px;margin:0}@media print{body{margin:0}}';
+  var html='<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+title+'</title><style>'+css+'</style></head><body><h1>'+title+'</h1><div class="sub">Little Steps</div>'+body+'</body></html>';
+  try{var blob=new Blob([html],{type:'text/html'});var url=URL.createObjectURL(blob);var a=document.createElement('a');a.href=url;a.download=filename;document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(url);},1200);}
+  catch(e){var w=window.open('','_blank');if(w){w.document.write(html);w.document.close();}}
+}
+function checklistSection(title,items){var h='<h2>'+esc(title)+'</h2><ul>';items.forEach(function(it){h+='<li><span class="box"></span><span>'+esc(it)+'</span></li>';});return h+'</ul>';}
+
+/* ---------------- hospital bag ---------------- */
+var HOSPBAG=[
+ {t:'For you — labour',items:['Maternity notes & ID','A copy of your birth plan','Comfy nightie or old T-shirt','Dressing gown & slippers','Warm socks','Lip balm & hair ties','Phone + a long charger','Snacks & drinks','Water spray or handheld fan','Massage oil or TENS machine']},
+ {t:'For you — after birth',items:['2–3 changes of comfy clothes','Nursing bras & breast pads','Maternity pads (2 packs)','Old or disposable underwear','Toiletries & a towel','Your going-home outfit']},
+ {t:'For baby',items:['5–6 babygrows & vests','Newborn nappies & wipes','Cotton wool / cotton pads','Muslin cloths','2 soft blankets','Hat, mittens & socks','Going-home outfit','Car seat — fitted & ready']},
+ {t:'For your partner',items:['Snacks & drinks','Phone charger','A change of clothes','Cash / card for parking','Camera','List of people to call']},
+ {t:'Documents',items:['ID / passport','Medical aid card','Hospital pre-admission forms','Birth plan','Maternity notes']}
+];
+function toggleHosp(id){S.hosp=S.hosp||{};if(S.hosp[id])delete S.hosp[id];else{S.hosp[id]=true;chime([680]);}save();render();}
+function downloadHospBag(){var body='';HOSPBAG.forEach(function(s){body+=checklistSection(s.t,s.items);});downloadDoc('hospital-bag-checklist.html','Hospital Bag Checklist',body);}
+function vHospBag(){
+  var total=0,got=0;HOSPBAG.forEach(function(s){s.items.forEach(function(it){total++;if((S.hosp||{})[s.t+'|'+it])got++;});});
+  var pct=total?Math.round(got/total*100):0;
+  var out=statusBar()+'<div class="greet"><div class="g1">Hospital bag</div><div class="g2">Packed & ready by ~36 weeks</div></div>';
+  out+='<div class="card" style="background:linear-gradient(155deg,#fbf3e4,#f1e2c8)"><div class="hd">'+got+' <span style="font-size:15px;color:var(--muted)">/ '+total+' packed</span></div><div style="margin-top:12px">'+triBar(pct)+'</div></div>';
+  out+='<button class="btn" style="margin-bottom:16px" onclick="downloadHospBag()">⬇ Download checklist</button>';
+  HOSPBAG.forEach(function(s){
+    out+='<div class="sec-label">'+esc(s.t)+'</div><div class="card" style="padding:2px 14px">';
+    s.items.forEach(function(it,i){var id=s.t+'|'+it,on=!!(S.hosp||{})[id];
+      out+='<div onclick="toggleHosp(\''+id.replace(/'/g,"\\'")+'\')" style="display:flex;align-items:center;gap:12px;padding:12px 4px;'+(i<s.items.length-1?'border-bottom:1px solid var(--line2);':'')+'"><div style="flex:1;font-size:14.5px;font-weight:'+(on?500:600)+';color:'+(on?'var(--muted)':'var(--ink2)')+';'+(on?'text-decoration:line-through;text-decoration-color:var(--line)':'')+'">'+esc(it)+'</div><div class="check '+(on?'on':'')+'"><svg viewBox="0 0 24 24"><use href="#ic-check"/></svg></div></div>';
     });
     out+='</div>';
   });
   return out;
 }
+function downloadBirthPlan(){S.birth=S.birth||{};var body='';
+  BIRTHQ.forEach(function(qq){var v=S.birth[qq.k];var ans=qq.multi?((v||[]).join(', ')):(v||'');if(!ans)ans='—';body+='<h2>'+esc(qq.q)+'</h2><p class="note">'+esc(ans)+'</p>';});
+  if((S.birth.note||'').trim())body+='<h2>Anything else</h2><p class="note">'+esc(S.birth.note)+'</p>';
+  downloadDoc('birth-plan.html','My Birth Plan',body);
+}
+
 /* ---------------- weight tracker ---------------- */
 function vWeight(){
   var ws=(S.weights||[]).slice().sort(function(a,b){return (a.date||'').localeCompare(b.date||'')});
@@ -1201,6 +1346,7 @@ function vWeight(){
   if(ws.length>1){var ks=ws.map(function(w){return w.kg;});var mn=Math.min.apply(null,ks),mx=Math.max.apply(null,ks),rng=(mx-mn)||1;
     var pts=ws.map(function(w,i){var x=ws.length>1?(i/(ws.length-1))*100:50;var y=28-((w.kg-mn)/rng)*24-2;return x.toFixed(1)+','+y.toFixed(1);}).join(' ');
     out+='<div class="card"><svg viewBox="0 0 100 30" preserveAspectRatio="none" style="width:100%;height:80px"><polyline points="'+pts+'" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>';}
+  out+=weightStatsCard();
   out+='<button class="btn" onclick="openWeight()" style="margin-bottom:14px">Log today\'s weight</button>';
   out+='<div class="card" style="background:linear-gradient(155deg,#fbf3e4,#f1e2c8)"><div style="font-size:13.5px;color:var(--ink2);line-height:1.55;font-weight:500">💡 Most women gain around 10–14 kg over a whole pregnancy, mostly in the second and third trimesters. There\'s no perfect number — steady, gradual gain from eating well is what matters. Your midwife keeps an eye on it, so try not to stress the scale.</div></div>';
   if(ws.length){out+='<div class="sec-label">History</div>';
@@ -1210,6 +1356,84 @@ function vWeight(){
 function openWeight(){var h='<div class="sheet-title">Log your weight</div><div class="lbl">Date</div><input type="date" id="wDate" value="'+ymd(today())+'"><div class="lbl" style="margin-top:14px">Weight (kg)</div><input class="fld" id="wKg" type="number" inputmode="decimal" step="0.1" placeholder="e.g. 68.5"><button class="btn" style="margin-top:16px" onclick="saveWeight()">Save</button>';openSheet(h);setTimeout(function(){var e=document.getElementById('wKg');if(e)e.focus();},80);}
 function saveWeight(){var kg=parseFloat(document.getElementById('wKg').value);if(!kg){alert('Pop in a weight to save 💛');return;}var date=document.getElementById('wDate').value||ymd(today());S.weights=S.weights||[];S.weights=S.weights.filter(function(w){return w.date!==date;});S.weights.push({id:'w'+Date.now(),date:date,kg:Math.round(kg*10)/10,week:week()||0});save();closeSheet();render();}
 function delWeight(id){S.weights=(S.weights||[]).filter(function(w){return w.id!==id});save();render();}
+/* ----- personalised weight + calorie guidance ----- */
+function bmiGain(bmi){if(bmi<18.5)return[12.5,18];if(bmi<25)return[11.5,16];if(bmi<30)return[7,11.5];return[5,9];}
+function calTarget(){var st=S.wstats;if(!st||!st.height||!st.prekg)return null;var age=st.age||30;var bmr=10*st.prekg+6.25*st.height-5*age-161;var af=({sedentary:1.4,light:1.55,active:1.7})[st.activity||'light'];var w=week()||0;var add=w<14?0:(w<28?340:450);return Math.round((bmr*af+add)/10)*10;}
+function openWeightStats(){var st=S.wstats||{};
+  var h='<div class="sheet-title">Your details</div><div style="font-size:13px;color:var(--muted);font-weight:500;margin-bottom:14px;line-height:1.55">Just for a personal guide on healthy weight gain and how much to eat. Private, stays on your phone 💛</div>';
+  h+='<div class="lbl">Height (cm)</div><input class="fld" id="stH" type="number" inputmode="numeric" placeholder="e.g. 165" value="'+(st.height||'')+'">';
+  h+='<div class="lbl" style="margin-top:12px">Weight before pregnancy (kg)</div><input class="fld" id="stW" type="number" inputmode="decimal" step="0.1" placeholder="e.g. 62" value="'+(st.prekg||'')+'">';
+  h+='<div class="lbl" style="margin-top:12px">Your age <span style="text-transform:none;letter-spacing:0;color:var(--faint)">(optional)</span></div><input class="fld" id="stA" type="number" inputmode="numeric" placeholder="e.g. 30" value="'+(st.age||'')+'">';
+  h+='<div class="lbl" style="margin-top:12px">How active are you?</div><div class="seg" id="stAct">'+[['sedentary','Not very'],['light','A little'],['active','Quite active']].map(function(a){return '<button class="seg-tog'+(((st.activity||'light')===a[0])?' on':'')+'" onclick="stPickAct(this,\''+a[0]+'\')">'+a[1]+'</button>';}).join('')+'</div>';
+  h+='<button class="btn" style="margin-top:16px" onclick="saveWeightStats()">Save my details</button>';
+  openSheet(h);stActSel=st.activity||'light';
+}
+var stActSel='light';
+function stPickAct(btn,a){stActSel=a;var p=btn.parentNode;p.querySelectorAll('button').forEach(function(b){b.classList.remove('on')});btn.classList.add('on');}
+function saveWeightStats(){var h=parseFloat(document.getElementById('stH').value),w=parseFloat(document.getElementById('stW').value),a=parseInt(document.getElementById('stA').value,10);
+  if(!h||!w){alert('Pop in your height and pre-pregnancy weight 💛');return;}
+  S.wstats={height:Math.round(h),prekg:Math.round(w*10)/10,age:(a||null),activity:stActSel};save();closeSheet();render();}
+function weightStatsCard(){var st=S.wstats||{};
+  if(st.height&&st.prekg){var bmi=st.prekg/Math.pow(st.height/100,2);var g=bmiGain(bmi);var tgt=calTarget();
+    return '<div class="card" onclick="openWeightStats()"><div class="row"><div class="chip pk"><svg viewBox="0 0 24 24"><use href="#ic-target"/></svg></div><div class="tx"><b>Your healthy targets</b><small>Based on your details · tap to update</small></div>'+chev+'</div><div class="divider"></div><div style="font-size:13.5px;color:var(--ink2);line-height:1.75;font-weight:500">Healthy gain for the whole pregnancy: <b>'+g[0]+'–'+g[1]+' kg</b>'+(tgt?'<br>Aim for roughly <b>'+tgt+' kcal</b> a day at this stage':'')+'</div></div>';}
+  return '<div class="card" onclick="openWeightStats()" style="background:linear-gradient(155deg,#fbf3e4,#f1e2c8)"><div class="row"><div class="chip pk"><svg viewBox="0 0 24 24"><use href="#ic-target"/></svg></div><div class="tx"><b>Add your details</b><small>For personal eating & weight-gain guidance</small></div>'+chev+'</div></div>';
+}
+
+/* ---------------- food log (+ rough calories) ---------------- */
+var FOODCAL=[
+ ['chicken breast',165],['peanut butter',190],['ice cream',200],['maple syrup',52],['hot dog',300],['bread roll',120],['slice of bread',80],
+ ['egg',78],['eggs',156],['toast',80],['bread',80],['oats',150],['oatmeal',150],['porridge',150],['cereal',150],['rusk',120],['vetkoek',300],
+ ['banana',105],['apple',95],['orange',62],['grapes',100],['strawberr',50],['mango',200],['avocado',240],['pear',100],['fruit',80],
+ ['rice',205],['pasta',220],['noodle',220],['potato',160],['chips',300],['fries',300],['wrap',200],['tortilla',150],['pap',180],
+ ['chicken',200],['beef',250],['steak',280],['mince',250],['boerewors',280],['pork',240],['bacon',90],['sausage',180],['salmon',210],['tuna',130],['fish',180],['prawns',100],['biltong',80],
+ ['cheese',110],['milk',120],['yoghurt',120],['yogurt',120],['butter',100],['cream',100],['smoothie',180],
+ ['salad',80],['broccoli',55],['carrot',30],['spinach',25],['beans',130],['lentil',115],['soup',150],['vegetable',50],['veggies',50],
+ ['chocolate',230],['biscuit',70],['cookie',150],['cake',350],['muffin',300],['sweets',150],['candy',150],['crisps',150],['popcorn',100],['nuts',180],['doughnut',250],
+ ['pizza',285],['burger',350],['sandwich',300],['curry',400],['stew',350],['pie',400],['nugget',50],
+ ['latte',120],['cappuccino',80],['coffee',5],['tea',2],['juice',110],['cola',140],['coke',140],['soda',140],['water',0],
+ ['sugar',16],['honey',64],['jam',50]
+];
+function estimateCal(text){if(!text)return null;var q=' '+text.toLowerCase()+' ';var sum=0,hit=false;
+  var arr=FOODCAL.slice().sort(function(a,b){return b[0].length-a[0].length;});
+  arr.forEach(function(f){var idx=q.indexOf(f[0]);if(idx>=0){sum+=f[1];hit=true;q=q.slice(0,idx)+'  '+q.slice(idx+f[0].length);}});
+  return hit?sum:null;}
+var fdMealSel='Breakfast';
+function openFoodAdd(){
+  var h='<div class="sheet-title">Add food</div>';
+  h+='<div class="lbl">What did you eat?</div><input class="fld" id="fdItem" placeholder="e.g. chicken salad and an apple" oninput="fdEstimate()">';
+  h+='<div class="lbl" style="margin-top:14px">Meal</div><div class="seg" id="fdMeal">'+['Breakfast','Lunch','Dinner','Snacks'].map(function(m,i){return '<button class="seg-tog'+(i===0?' on':'')+'" onclick="fdPickMeal(this,\''+m+'\')">'+m+'</button>';}).join('')+'</div>';
+  h+='<div class="lbl" style="margin-top:14px">Calories <span style="text-transform:none;letter-spacing:0;color:var(--faint)">— auto-estimated, edit if you like</span></div><input class="fld" id="fdKcal" type="number" inputmode="numeric" placeholder="—">';
+  h+='<button class="btn" style="margin-top:16px" onclick="saveFood()">Add to today</button>';
+  openSheet(h);fdMealSel='Breakfast';setTimeout(function(){var e=document.getElementById('fdItem');if(e)e.focus();},80);
+}
+function fdPickMeal(btn,m){fdMealSel=m;var p=btn.parentNode;p.querySelectorAll('button').forEach(function(b){b.classList.remove('on')});btn.classList.add('on');}
+function fdEstimate(){var t=(document.getElementById('fdItem')||{}).value||'';var c=estimateCal(t);var k=document.getElementById('fdKcal');if(k&&document.activeElement!==k)k.value=(c!=null?c:'');}
+function saveFood(){var it=(document.getElementById('fdItem')||{}).value||'';it=it.trim();if(!it){alert('Add what you ate 💛');return;}
+  var kv=(document.getElementById('fdKcal')||{}).value;var kcal=(kv!==''&&kv!=null)?Math.round(parseFloat(kv)):estimateCal(it);
+  var day=ymd(today());S.food=S.food||{};S.food[day]=S.food[day]||[];S.food[day].push({id:'f'+Date.now(),item:it,kcal:(kcal!=null&&!isNaN(kcal)?kcal:null),meal:fdMealSel});
+  var t=todayState();t.seen=true;save();closeSheet();render();}
+function delFood(id){var day=ymd(today());if(S.food&&S.food[day]){S.food[day]=S.food[day].filter(function(e){return e.id!==id;});save();render();}}
+function vFood(){
+  var day=ymd(today());var list=(S.food&&S.food[day])||[];
+  var total=list.reduce(function(a,e){return a+(e.kcal||0);},0);
+  var target=calTarget();
+  var out=statusBar()+'<div class="greet"><div class="g1">Food log</div><div class="g2">What you ate today</div></div>';
+  out+='<div class="hero" style="padding:20px"><div class="wk">Today</div><div class="big" style="margin-top:6px">'+total+' <span style="font-size:18px;color:var(--muted)">kcal</span></div>';
+  if(target)out+='<div style="font-size:13px;color:var(--ink2);font-weight:600;margin-top:8px">of about '+target+' kcal a day'+(list.length&&total>target+200?' · a touch over 💛':'')+'</div><div style="margin-top:12px">'+triBar(Math.min(100,Math.round(total/target*100)))+'</div>';
+  else out+='<div style="font-size:12.5px;color:var(--muted);font-weight:500;margin-top:8px;line-height:1.5">Add your details on the Weight screen for a personal daily target 💛</div>';
+  out+='</div>';
+  out+='<button class="btn" onclick="openFoodAdd()" style="margin-bottom:14px">+ Add something you ate</button>';
+  if(!list.length)out+='<div class="empty">Nothing logged yet today.<br>Tap above to add your first meal or snack 💛</div>';
+  else ['Breakfast','Lunch','Dinner','Snacks'].forEach(function(ml){
+    var items=list.filter(function(e){return (e.meal||'Snacks')===ml;});if(!items.length)return;
+    var sub=items.reduce(function(a,e){return a+(e.kcal||0);},0);
+    out+='<div class="sec-label">'+ml+' <span style="color:var(--faint)">· '+sub+' kcal</span></div><div class="card" style="padding:2px 14px">';
+    items.forEach(function(e,i){out+='<div style="display:flex;align-items:center;gap:10px;padding:12px 4px;'+(i<items.length-1?'border-bottom:1px solid var(--line2);':'')+'"><div style="flex:1;font-size:14.5px;color:var(--ink2);font-weight:600">'+esc(e.item)+'</div><div style="font-size:13px;color:var(--muted);font-weight:600">'+(e.kcal!=null?e.kcal:'—')+'</div><button onclick="delFood(\''+e.id+'\')" style="color:var(--faint);font-size:19px;padding:0 2px;line-height:1">×</button></div>';});
+    out+='</div>';
+  });
+  out+='<div style="text-align:center;font-size:11.5px;color:var(--muted);margin:8px 0 4px;line-height:1.5">Calorie estimates are rough guides — every body and pregnancy is different 💛</div>';
+  return out;
+}
 
 /* ---------------- baby names (with meanings) ---------------- */
 var NAMES=[
@@ -1384,6 +1608,7 @@ function vBirth(){
     out+='</div>';
   });
   out+='<div class="card" style="margin-top:8px"><div class="lbl">Anything else</div><textarea onblur="setBirthNote(this.value)" placeholder="Other wishes, fears, things your team should know…">'+esc(S.birth.note||'')+'</textarea></div>';
+  out+='<button class="btn" style="margin-top:6px" onclick="downloadBirthPlan()">⬇ Download my birth plan</button>';
   return out;
 }
 
@@ -1610,6 +1835,19 @@ function aiReply(q){q=' '+q.toLowerCase()+' ';var w=week()||18;
   if(/preeclampsia|blurred vision|swelling.*(sudden|face|hand)|bad headache|see spots|flashing/.test(q))return "A sudden bad headache, blurred vision or flashing spots, or sudden swelling in your face and hands can be signs of pre-eclampsia and need checking urgently — please call your midwife or maternity unit today. Better safe.";
   // ——— food & drink ———
   if(/sushi|raw fish|sashimi/.test(q))return "Cooked sushi is fine 👍 Skip raw fish and high-mercury ones (tuna, swordfish, king mackerel). Cooked salmon, prawns and veggie rolls are all great.";
+  if(/\bfish\b|salmon|tuna|mackerel|sardine|seafood|prawn|shrimp|oyster|mussel/.test(q))return "Most fish is brilliant for baby — oily fish like salmon and sardines are packed with omega-3 💛 Aim for about 2 portions a week. Limit tuna (roughly 2 tins or 1 fresh steak a week) and skip high-mercury swordfish, shark and king mackerel. Cook it through — only raw fish and sushi are a no.";
+  if(/chicken|poultry|turkey/.test(q))return "Chicken's a great lean protein 👍 Just cook it right through — no pink in the middle — and reheat any leftovers until piping hot.";
+  if(/\bmeat\b|steak|\bbeef\b|\bpork\b|\blamb\b|bacon|sausage|mince|braai|biltong|salami|ham/.test(q))return "Meat's fine when it's well cooked all the way through — skip anything rare or pink, and cured or raw meats like salami, biltong and parma ham (small toxoplasmosis and listeria risk). Wash hands and boards well after raw meat.";
+  if(/spicy|spice|curry|chilli|chili|hot food/.test(q))return "Spicy food is totally safe 🌶️ It won't harm baby at all — it might just give you a bit of heartburn later on. Enjoy it if you're craving it.";
+  if(/fruit|veg\b|vegetable|salad|pineapple|papaya|\bmango\b/.test(q))return "Fruit and veg are exactly what you want — aim for plenty of colour on your plate. Just wash everything well to get rid of any soil. And no, pineapple won't bring on labour — that's an old myth, enjoy it 💛";
+  if(/milk|dairy|yog|yoghurt|yogurt|cheddar|\bcream\b/.test(q))return "Dairy's great for calcium — milk, hard cheeses like cheddar and gouda, and pasteurised yoghurt are all fine. The only ones to skip are soft, mould-ripened or unpasteurised cheeses like brie and blue.";
+  if(/ice ?cream|soft serve|softserve|milkshake|gelato/.test(q))return "Shop-bought ice cream is fine 🍦 The only one to be a little wary of is soft-serve from machines that aren't kept spotless. Tubs and sticks are safe.";
+  if(/chocolate|sweet|sugar|candy|dessert|\bcake\b|biscuit/.test(q))return "A treat is completely fine 💛 Just remember chocolate has a little caffeine, and go easy on sugar overall — it keeps your energy steadier and helps avoid trouble at the glucose test later.";
+  if(/water|hydrate|how much.*drink|thirsty|dehydrat/.test(q))return "Aim for roughly 8–10 glasses (about 2 litres) a day — more in the heat or if you're active. Good hydration helps with tiredness, headaches, constipation and swelling. There's a water tracker on Home 💧";
+  if(/herbal|\btea\b|rooibos|peppermint|raspberry leaf|chamomile/.test(q))return "Most herbal teas in normal amounts are fine — rooibos, ginger and peppermint are lovely (ginger even helps with nausea). Go easy on very strong ones, and save raspberry-leaf tea for the last few weeks, and only if your midwife's happy.";
+  if(/takeaway|take away|fast food|fried|chips|burger|pizza|kfc|mcdonald/.test(q))return "Takeaway's okay now and then 💛 Just make sure it's hot, fresh and properly cooked — piping hot, not sitting around. Everything in balance.";
+  if(/honey/.test(q))return "Honey's perfectly safe for you in pregnancy 🍯 (Just remember never to give honey to baby until they're over one year old.)";
+  if(/liver|pate|pâté|cod liver|vitamin a/.test(q))return "Skip liver and pâté — they're very high in vitamin A, which can build up to too much in pregnancy. Get your iron from red meat, beans and leafy greens instead.";
   if(/coffee|caffeine|espresso|energy drink/.test(q))return "One small coffee a day is generally okay — keep total caffeine under about 200mg (roughly one to two cups). Remember tea, cola and chocolate add up too.";
   if(/wine|alcohol|beer|drink alcohol|champagne/.test(q))return "Safest to skip alcohol entirely — there's no known safe amount in pregnancy. A fancy mocktail hits the same vibe 🍹";
   if(/cheese|brie|feta|deli|pate|pâté|cold meat|lunch meat|listeria/.test(q))return "Avoid soft unpasteurised cheeses (brie, blue, unpasteurised feta), pâté and cold deli meats — small listeria risk. Hard cheeses, cooked cheese and pasteurised versions are fine.";
@@ -1674,7 +1912,14 @@ function aiReply(q){q=' '+q.toLowerCase()+' ';var w=week()||18;
   if(/^\s*(hi|hello|hey|yo|hiya|howzit)\s*$/.test(q)||/how are you|who are you|what can you/.test(q))return "Hey"+(youName()?' '+youName():'')+"! 💛 I'm Little — ask me anything about pregnancy or baby. Symptoms, foods, what to buy, how you're feeling, the birth… whatever's on your mind. You're in week "+w+".";
   if(/thank|thanks|cheers|lekker/.test(q))return "Anytime 💛 I'm right here whenever you need me.";
   // ——— smart fallback ———
-  return "Good question 💛 "+midwife+"You're in week "+w+", which is mostly about "+weeklyFocus(w).toLowerCase()+". Try asking me about symptoms, foods to eat or avoid, what to buy, movements, appointments, labour, or how you're feeling — I've got you.";}
+  // ——— smart fallback: catch the topic even when no exact rule matched, and vary the opener ———
+  var opener=["Good question 💛 ","I've got you 💛 ","Happy to help with that 💛 ","Let's have a look 💛 "][aiHist.length%4];
+  if(/eat|food|drink|safe to|can i have|is it ok|is it okay|allowed|avoid/.test(q))return opener+midwife+"The general rule for food and drink: cook things through, skip raw or undercooked meat and fish, unpasteurised soft cheese, pâté and alcohol, and keep caffeine under about 200mg. The 'Is it safe?' tool on the More tab has a full browsable list — or just tell me the specific food and I'll check it.";
+  if(/feel|feeling|mood|emotion|happy|excited|normal to feel|hormonal|weepy/.test(q))return opener+"However you're feeling is valid 💛 Pregnancy is a big emotional ride and it changes day to day. You can log your mood and check-in on Home. If low or anxious feelings hang around most days though, please tell your midwife — support really helps.";
+  if(/baby|bump|belly|womb|growing|developing/.test(q)){var bb=W[Math.min(40,Math.max(4,w))];return opener+"At week "+w+", baby's about the size of "+bb[0]+" — "+bb[3]+" Ask me anything about movements, scans, or how baby's growing week to week.";}
+  if(/birth|labour|labor|deliver|hospital|push|contraction|water.*break/.test(q))return opener+"For the birth, I can walk you through the signs labour's starting, the 5-1-1 rule for when to go in, pain relief options, your birth plan, or what to pack. What part's on your mind?";
+  if(/week|trimester|when|how long|due|stage/.test(q))return opener+"You're in week "+w+" — "+weeklyFocus(w).toLowerCase()+". The Journey tab lets you browse every week ahead. Ask me what's happening right now, or what's coming up.";
+  return opener+"I'm not 100% sure on that exact one, so I'd double-check it with your midwife to be safe. But I can help with symptoms, foods, what to buy, movements, appointments, labour, feelings and baby care — what would you like to know?";}
 
 /* ---------------- streak + verses ---------------- */
 function streakCount(){
@@ -1722,21 +1967,29 @@ function dayOfYear(){var d=new Date();var s=new Date(d.getFullYear(),0,0);return
 function verseOfDay(){return VERSES[dayOfYear()%VERSES.length];}
 
 /* ---------------- Plan: events + projects ---------------- */
+// in chronological pregnancy order — earliest first, birth last
 var EVENTS=[
- {id:'gender_reveal',name:'Gender reveal',icon:'ic-sparkle',tone:'pk',guide:'Usually around 16–20 weeks, after your anatomy scan.',items:['Confirm the gender at your scan','Pick a date & time','Decide who hosts and where','Choose the reveal method','Invite family & close friends','Order or prep the reveal item','Plan a few photos']},
- {id:'gender_reveal_shoot',name:'Gender reveal shoot',icon:'ic-camera',tone:'lv',guide:'Pair it with your reveal day if you can — book the photographer early.',items:['Find & book a photographer','Pick a location','Decide outfits & colour theme','Gather props (smoke, balloons, board)','Confirm date & timing','Create a shot list','Plan how you\'ll share the photos']},
- {id:'maternity_shoot',name:'Maternity shoot',icon:'ic-camera',tone:'rs',guide:'Best around 28–34 weeks, when your bump is beautifully round.',items:['Book a photographer','Choose indoor or outdoor','Pick 2–3 outfits','Decide on hair & makeup','Scout the location & time of day','Bring partner and any props','Plan where to print or display']},
- {id:'newborn_shoot',name:'Newborn shoot',icon:'ic-camera',tone:'bl',guide:'Book now, shoot in baby\'s first 5–14 days while they\'re extra sleepy.',items:['Book the photographer in advance','Confirm they do newborn sessions','Prep wraps, blankets & outfits','Keep the room warm on the day','Feed baby right before','Aim for baby\'s nap window','Choose album or prints after']},
- {id:'baby_shower',name:'Baby shower',icon:'ic-heart',tone:'bt',guide:'Usually 28–32 weeks, before things get too tiring.',items:['Pick a date','Choose a venue','Write the guest list','Send invitations','Decide theme & colours','Order the cake','Plan games & activities','Share your registry link']}
+ {id:'announcement',name:'Pregnancy announcement',icon:'ic-heart',tone:'rs',wk:12,guide:'Whenever you\'re ready — many share after the 12-week scan.',items:['Decide who to tell first, in person','Pick a date to go public','Plan the photo or wording','Tell close family & friends first','Post it or send it','Soak up the lovely messages 💛']},
+ {id:'gender_reveal',name:'Gender reveal',icon:'ic-sparkle',tone:'pk',wk:18,guide:'Usually around 16–20 weeks, after your anatomy scan.',items:['Confirm the gender at your scan','Pick a date & time','Decide who hosts and where','Choose the reveal method','Invite family & close friends','Order or prep the reveal item','Plan a few photos']},
+ {id:'gender_reveal_shoot',name:'Gender reveal shoot',icon:'ic-camera',tone:'lv',wk:18,guide:'Pair it with your reveal day if you can — book the photographer early.',items:['Find & book a photographer','Pick a location','Decide outfits & colour theme','Gather props (smoke, balloons, board)','Confirm date & timing','Create a shot list','Plan how you\'ll share the photos']},
+ {id:'nursery',name:'Baby\'s nursery',icon:'ic-home',tone:'sg',wk:24,guide:'Weeks 20–30 are a comfy time to start — no rush.',items:['Choose a theme & colours','Paint (low-VOC, well ventilated)','Build the cot','Set up the changing station','Sort storage & shelves','Wash & put away baby clothes','Add blackout curtains','Stock nappies & wipes']},
+ {id:'baby_shower',name:'Baby shower',icon:'ic-heart',tone:'bt',wk:30,guide:'Usually 28–32 weeks, before things get too tiring.',items:['Pick a date','Choose a venue','Write the guest list','Send invitations','Decide theme & colours','Order the cake','Plan games & activities','Share your registry link']},
+ {id:'maternity_shoot',name:'Maternity shoot',icon:'ic-camera',tone:'rs',wk:31,guide:'Best around 28–34 weeks, when your bump is beautifully round.',items:['Book a photographer','Choose indoor or outdoor','Pick 2–3 outfits','Decide on hair & makeup','Scout the location & time of day','Bring partner and any props','Plan where to print or display']},
+ {id:'packing_bag',name:'Packing the baby bag',icon:'ic-cart',tone:'bt',wk:35,guide:'Have it packed and by the door by around 36 weeks.',items:['Open the Hospital bag checklist','Pack your labour bag','Pack your after-birth bag','Pack baby\'s bag','Add your documents','Fit the car seat','Keep it all by the door']},
+ {id:'hospital_day',name:'Going to hospital (the birth)',icon:'ic-baby',tone:'pk',wk:40,guide:'When labour starts — you\'ve got this 💛',items:['Know the signs of labour','Remember the 5-1-1 rule for when to go in','Car seat fitted & ready','Hospital bag by the door','Who to call + your lift sorted','Route to hospital planned','Phone charged']},
+ {id:'newborn_shoot',name:'Newborn shoot',icon:'ic-camera',tone:'bl',wk:41,guide:'Book now, shoot in baby\'s first 5–14 days while they\'re extra sleepy.',items:['Book the photographer in advance','Confirm they do newborn sessions','Prep wraps, blankets & outfits','Keep the room warm on the day','Feed baby right before','Aim for baby\'s nap window','Choose album or prints after']}
 ];
 function ensureProjects(){
-  if(!S.projects){
-    S.projects=[
-      {id:'p_office',name:'Office',date:'',tasks:[{id:'t1',text:'Clear and tidy the desk',done:false},{id:'t2',text:'Set up a baby-admin folder',done:false},{id:'t3',text:'Sort important paperwork',done:false}],notes:''},
-      {id:'p_bedroom',name:'Our bedroom',date:'',tasks:[{id:'t1',text:'Deep clean the room',done:false},{id:'t2',text:'Make space for the bassinet',done:false},{id:'t3',text:'Wash & freshen the bedding',done:false}],notes:''},
-      {id:'p_babyroom',name:'Baby room',date:'',tasks:[{id:'t1',text:'Paint the walls',done:false},{id:'t2',text:'Build the cot',done:false},{id:'t3',text:'Set up the changing station',done:false},{id:'t4',text:'Wash the baby clothes',done:false},{id:'t5',text:'Stock nappies & wipes',done:false}],notes:''}
-    ];
-    save();
+  if(!S.projects)S.projects=[];
+  // one-time migration: the old fixed rooms are gone. If they're still the untouched defaults, clear them
+  // for the freeform "Personal projects" section. If the user has touched them, keep them (no data lost).
+  if(!S.projectsMigrated){
+    var def={p_office:3,p_bedroom:3,p_babyroom:5};
+    var ids=S.projects.map(function(p){return p.id;}).sort().join(',');
+    var isDefault=(ids==='p_babyroom,p_bedroom,p_office');
+    var touched=S.projects.some(function(p){return (p.notes||'').trim()||(p.tasks||[]).some(function(t){return t.done;})||((p.tasks||[]).length!==(def[p.id]||0))||p.date;});
+    if(isDefault&&!touched)S.projects=[];
+    S.projectsMigrated=true;save();
   }
 }
 function progressBar(pct){return '<div style="height:7px;border-radius:4px;background:var(--line);overflow:hidden"><div style="height:100%;width:'+pct+'%;background:var(--espresso);border-radius:4px;transition:width .2s"></div></div>';}
@@ -1744,8 +1997,8 @@ var chev='<svg width="17" height="17" style="opacity:.35;flex:none"><path d="M7 
 
 function vPlan(){
   ensureProjects();S.events=S.events||{};
-  var out=statusBar()+'<div class="greet"><div class="g1">Plan ahead</div><div class="g2">Events &amp; projects</div></div>';
-  out+='<div class="sec-label">Events to plan</div>';
+  var out=statusBar()+'<div class="greet"><div class="g1">Plan ahead</div><div class="g2">Milestones &amp; personal projects</div></div>';
+  out+='<div class="sec-label">Milestones to plan</div>';
   EVENTS.forEach(function(e){
     var st=S.events[e.id]||{date:'',checks:{}};
     var done=e.items.filter(function(_,i){return st.checks&&st.checks[i]}).length;
@@ -1753,10 +2006,11 @@ function vPlan(){
     if(st.date){var nd=new Date(st.date+'T00:00:00');var dd=Math.round((nd-today())/DAY);count=dd>=0?(dd===0?'Today':'In '+dd+' days'):Math.abs(dd)+' days ago';}
     out+='<div class="card" onclick="openEvent(\''+e.id+'\')"><div class="row"><div class="chip '+e.tone+'"><svg viewBox="0 0 24 24"><use href="#'+e.icon+(e.icon==='ic-sparkle'?'" stroke="#9a7b68':'')+'"/></svg></div><div class="tx">'+esc(e.name)+'<small>'+done+' / '+e.items.length+' done'+(count?' · '+count:'')+'</small></div>'+chev+'</div></div>';
   });
-  out+='<div class="sec-label">Projects</div>';
+  out+='<div class="sec-label">Personal projects</div>';
+  if(!S.projects.length)out+='<div class="empty" style="padding:18px 12px">Anything you want to plan yourself — a room, a trip, a to-do list.<br>Tap below to add your first one 💛</div>';
   S.projects.forEach(function(p){
     var t=p.tasks||[];var d=t.filter(function(x){return x.done}).length;var pct=t.length?Math.round(d/t.length*100):0;
-    out+='<div class="card" onclick="openProject(\''+p.id+'\')"><div class="row" style="margin-bottom:12px"><div class="chip sg"><svg viewBox="0 0 24 24"><use href="#ic-home"/></svg></div><div class="tx">'+esc(p.name)+'<small>'+d+' / '+t.length+' tasks'+(p.date?' · target '+new Date(p.date+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}):'')+'</small></div><div style="font-family:var(--serif);font-size:20px;color:var(--ink);font-variant-numeric:tabular-nums">'+pct+'%</div></div>'+progressBar(pct)+'</div>';
+    out+='<div class="card" onclick="openProject(\''+p.id+'\')"><div class="row" style="margin-bottom:12px"><div class="chip lv"><svg viewBox="0 0 24 24"><use href="#ic-target"/></svg></div><div class="tx">'+esc(p.name)+'<small>'+d+' / '+t.length+' tasks'+(p.date?' · target '+new Date(p.date+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}):'')+'</small></div><div style="font-family:var(--serif);font-size:20px;color:var(--ink);font-variant-numeric:tabular-nums">'+pct+'%</div></div>'+progressBar(pct)+'</div>';
   });
   out+='<button class="btn" onclick="openNewProject()" style="margin-top:4px">Add a project</button>';
   return out;
@@ -1815,6 +2069,7 @@ function vMore(){
   var groups=[
     {h:'Track',t:[
       ['Symptoms','rs','ic-mood',"go('symptoms')"],
+      ['Food log','bt','ic-plate',"go('food')"],
       ['Weight','bl','ic-target',"go('weight')"],
       ['Kick counter','sg','ic-foot',"go('baby')"],
       ['Contractions','rs','ic-heart',"go('contractions')"]
@@ -1824,6 +2079,7 @@ function vMore(){
       ['Shopping','bt','ic-cart',"go('shop')"],
       ['Baby names','lv','ic-heart',"go('names')"],
       ['Birth plan','rs','ic-book',"go('birth')"],
+      ['Hospital bag','bt','ic-doc',"go('hospbag')"],
       ['Expenses','sg','ic-doc',"go('expenses')"],
       ['Is it safe?','sg','ic-check',"go('safe')"],
       ['Signs of labour','rs','ic-baby',"openLabour()"]
@@ -1902,10 +2158,14 @@ function achList(){
   var anyKick=kicks.length>0||((S.kick&&S.kick.count)>0);
   var appts=S.appts||[];
   var scan=appts.some(function(a){return a.type==='Scan'});
-  var babyRoom=(S.projects||[]).filter(function(p){return /baby\s*room/i.test(p.name)})[0];
-  var nurseryStarted=babyRoom&&(babyRoom.tasks||[]).some(function(t){return t.done});
-  var nurseryDone=babyRoom&&(babyRoom.tasks||[]).length>0&&(babyRoom.tasks||[]).every(function(t){return t.done});
-  var bags=(S.projects||[]).some(function(p){return (p.tasks||[]).some(function(t){return t.done&&/bag/i.test(t.text)})});
+  var babyRoom=(S.projects||[]).filter(function(p){return /baby\s*room|nursery/i.test(p.name)})[0];
+  var nurEv=(S.events||{}).nursery;var nurItems=(EVENTS.filter(function(e){return e.id==='nursery'})[0]||{items:[]}).items;
+  var nurEvStarted=!!(nurEv&&nurEv.checks&&nurItems.some(function(_,i){return nurEv.checks[i]}));
+  var nurEvDone=!!(nurEv&&nurEv.checks&&nurItems.length&&nurItems.every(function(_,i){return nurEv.checks[i]}));
+  var nurseryStarted=(babyRoom&&(babyRoom.tasks||[]).some(function(t){return t.done}))||nurEvStarted;
+  var nurseryDone=(babyRoom&&(babyRoom.tasks||[]).length>0&&(babyRoom.tasks||[]).every(function(t){return t.done}))||nurEvDone;
+  var packEv=(S.events||{}).packing_bag;
+  var bags=(S.projects||[]).some(function(p){return (p.tasks||[]).some(function(t){return t.done&&/bag/i.test(t.text)})})||Object.keys(S.hosp||{}).length>0||!!(packEv&&packEv.checks&&Object.keys(packEv.checks).some(function(k){return packEv.checks[k]}));
   var se=(S.events||{}).baby_shower;var showerItems=EVENTS.filter(function(e){return e.id==='baby_shower'})[0].items;
   var shower=!!(se&&se.checks&&showerItems.every(function(_,i){return se.checks[i]}));
   var streak=streakCount();
@@ -2009,11 +2269,13 @@ function lessonOfDay(){
 
 /* ---------------- photos ---------------- */
 var photoKind='bump';
-function pickPhoto(kind){photoKind=kind||'bump';
+var photoWeek=null;
+function pickPhoto(kind,wk){photoKind=kind||'bump';photoWeek=(wk==null?null:wk);
   var inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.style.display='none';
   inp.onchange=function(){var f=inp.files&&inp.files[0];if(f)processPhoto(f);if(inp.parentNode)inp.parentNode.removeChild(inp);};
   document.body.appendChild(inp);inp.click();
 }
+function pickPhotoWeek(kind,w){pickPhoto(kind,w);}
 function processPhoto(file){
   var reader=new FileReader();
   reader.onload=function(e){
@@ -2034,8 +2296,11 @@ function processPhoto(file){
 }
 function addPhoto(dataURL){
   S.photos=S.photos||[];
-  S.photos.push({id:'ph'+Date.now(),kind:photoKind,week:week()||0,date:ymd(today()),note:'',data:dataURL});
-  if(!savePhotos()){S.photos.pop();return;}
+  var pw=(photoWeek!=null?photoWeek:(week()||0));var wasBumpWeek=(photoWeek!=null&&photoKind==='bump');
+  S.photos.push({id:'ph'+Date.now(),kind:photoKind,week:pw,date:ymd(today()),note:'',data:dataURL});
+  if(!savePhotos()){S.photos.pop();photoWeek=null;return;}
+  photoWeek=null;
+  if(wasBumpWeek){render();openBumpWeek(pw);return;}
   if(TAB==='photos'||TAB==='baby')render();else go('photos');
 }
 function savePhotos(){try{localStorage.setItem(KEY,JSON.stringify(S));return true;}catch(e){alert("Your phone's storage for the app is full — remove a photo or two to add more.");return false;}}
@@ -2053,11 +2318,23 @@ function vPhotos(){
     });
     out+='</div>';}
   out+='<div class="sec-label">Bump timeline</div>';
-  if(!bumps.length)out+='<div class="empty" style="padding:20px 12px">No bump photos yet.<br>Snap one each week to watch baby grow.</div>';
-  else{bumps.forEach(function(p){
-    out+='<div class="card" style="padding:12px" onclick="openPhoto(\''+p.id+'\')"><div style="display:flex;align-items:center;gap:14px"><img src="'+p.data+'" style="width:76px;height:76px;object-fit:cover;border-radius:14px;border:1px solid var(--line);flex:none"><div style="flex:1"><div style="font-family:var(--serif);font-size:21px;color:var(--ink);font-weight:500">Week '+p.week+'</div><div style="font-size:12px;color:var(--muted);font-weight:500;margin-top:3px">'+(p.date?new Date(p.date+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}):'')+(p.note?' · '+esc(p.note):'')+'</div></div>'+chev+'</div></div>';
-  });}
+  var bw=bumpWeeks();var wks=Object.keys(bw).map(Number).sort(function(a,b){return a-b;});
+  if(!wks.length)out+='<div class="empty" style="padding:20px 12px">No bump photos yet.<br>Snap one each week to watch baby grow.</div>';
+  else wks.forEach(function(wk){var arr=bw[wk];var cover=arr[arr.length-1];
+    out+='<div class="card" style="padding:12px" onclick="openBumpWeek('+wk+')"><div style="display:flex;align-items:center;gap:14px"><div style="position:relative;flex:none"><img src="'+cover.data+'" style="width:76px;height:76px;object-fit:cover;border-radius:14px;border:1px solid var(--line);display:block">'+(arr.length>1?'<div style="position:absolute;right:-6px;bottom:-6px;background:var(--espresso);color:#f3ede3;font-size:11px;font-weight:700;border-radius:10px;padding:2px 7px;border:2px solid var(--card);font-variant-numeric:tabular-nums">'+arr.length+'</div>':'')+'</div><div style="flex:1"><div style="font-family:var(--serif);font-size:21px;color:var(--ink);font-weight:500">Week '+wk+'</div><div style="font-size:12px;color:var(--muted);font-weight:500;margin-top:3px">'+arr.length+' photo'+(arr.length>1?'s':'')+(cover.date?' · '+new Date(cover.date+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'}):'')+'</div></div>'+chev+'</div></div>';
+  });
   return out;
+}
+function bumpWeeks(){var m={};(S.photos||[]).filter(function(p){return p.kind==='bump';}).forEach(function(p){var w=p.week||0;(m[w]=m[w]||[]).push(p);});
+  Object.keys(m).forEach(function(k){m[k].sort(function(a,b){return (a.date||'').localeCompare(b.date||'')||(a.id||'').localeCompare(b.id||'');});});return m;}
+function openBumpWeek(w){var arr=(S.photos||[]).filter(function(p){return p.kind==='bump'&&(p.week||0)===w;}).sort(function(a,b){return (a.date||'').localeCompare(b.date||'')||(a.id||'').localeCompare(b.id||'');});
+  var h='<div class="sheet-title">Bump · Week '+w+'</div>';
+  if(arr.length){h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">';
+    arr.forEach(function(p){h+='<div onclick="openPhoto(\''+p.id+'\')" style="cursor:pointer"><img src="'+p.data+'" style="width:100%;aspect-ratio:1;object-fit:cover;border-radius:14px;border:1px solid var(--line);display:block">'+(p.note?'<div style="font-size:11px;color:var(--muted);font-weight:500;margin-top:5px;text-align:center;line-height:1.4">'+esc(p.note)+'</div>':'')+'</div>';});
+    h+='</div>';}
+  else h+='<div class="empty" style="padding:8px 4px 16px">No photos for this week yet.</div>';
+  h+='<button class="btn" onclick="pickPhotoWeek(\'bump\','+w+')">Add '+(arr.length?'another':'a photo')+' for week '+w+'</button>';
+  openSheet(h);
 }
 function openPhoto(id){
   var p=(S.photos||[]).filter(function(x){return x.id===id})[0];if(!p)return;
