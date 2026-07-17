@@ -3,19 +3,19 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='64'%20height='64'%3E%3Crect%20width='64'%20height='64'%20rx='14'%20fill='%23e7ddce'/%3E%3Ctext%20x='50%25'%20y='54%25'%20font-family='Georgia,serif'%20font-size='34'%20fill='%232c2824'%20text-anchor='middle'%20dominant-baseline='central'%20font-style='italic'%3Els%3C/text%3E%3C/svg%3E"></head><body><title>Little Steps</title>
 <style>
 :root{
-  /* warm luxury — cream, caramel, espresso; tonal but alive */
-  --bg:#efe3d0; --bg2:#e8d8bf; --surface:#f8f1e4; --card:#fbf4e7; --card2:#f4ecdb;
-  --ink:#2f2820; --ink2:#57493a; --muted:#8f8067; --faint:#b4a585;
-  --accent:#b3835e; --accent-d:#976748; --espresso:#2f2820; --espresso2:#463a2c;
-  --line:rgba(140,110,70,.18); --line2:rgba(140,110,70,.11);
-  /* warm tonal spectrum — muted but with real chroma so it reads as colour, not grey */
-  --peach:#d1a17c; --peach-s:#e3bd98; --peach-b:#f2dcc3;
-  --sage:#a6ac82; --sage-s:#c6caa0; --sage-b:#e2e4c4;
-  --blue:#93aeae; --blue-s:#b7cdca; --blue-b:#dae6e1;
-  --butter:#d9bd7f; --butter-s:#e9d5a0; --butter-b:#f5e8c2;
-  --lav:#b7a2b3; --lav-s:#cfbcc9; --lav-b:#e6d9e1;
-  --rose:#d2a394; --rose-s:#e4bfb1; --rose-b:#f2ddd2;
-  --shadow:0 1px 2px rgba(110,80,45,.05), 0 12px 30px rgba(120,90,50,.09);
+  /* warm organic nursery — cream, soft mocha & taupe, natural tan */
+  --bg:#f0e8dc; --bg2:#e7dccb; --surface:#f8f3eb; --card:#fbf6ef; --card2:#ede2d3;
+  --ink:#3f3428; --ink2:#6a5947; --muted:#9d8974; --faint:#c4b4a0;
+  --accent:#b1926f; --accent-d:#8c7259; --espresso:#3f3428; --espresso2:#57493a;
+  --line:rgba(140,110,75,.2); --line2:rgba(140,110,75,.11);
+  /* warm tonal spectrum — soft & natural, tonal but alive */
+  --peach:#cba883; --peach-s:#dec3a1; --peach-b:#efe0cb;
+  --sage:#aead85; --sage-s:#c9c9a3; --sage-b:#e6e5cf;
+  --blue:#9aadab; --blue-s:#bccecb; --blue-b:#dde7e2;
+  --butter:#d8bd84; --butter-s:#e8d3a2; --butter-b:#f4e8c6;
+  --lav:#bda7b1; --lav-s:#d3c2ca; --lav-b:#e9dee4;
+  --rose:#d1a794; --rose-s:#e2c2b2; --rose-b:#f1ddd2;
+  --shadow:0 1px 0 rgba(255,255,255,.6) inset, 0 2px 5px rgba(130,95,55,.05), 0 14px 34px rgba(130,95,55,.12);
   --serif:ui-serif,'New York',Georgia,'Times New Roman',serif;
   --sans:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',system-ui,sans-serif;
 }
@@ -734,12 +734,21 @@ function statusBar(){
 function bumpBody(p){var BX=(60+46*p).toFixed(1);
   return 'M40 135 L40 44 C40 34 44 30 52 30 C60 31 62 38 61 45 C60 52 56 55 56 60 C56 70 '+BX+' 74 '+BX+' 92 C'+BX+' 106 60 118 56 126 C52 132 46 135 40 135 Z';}
 function bumpSilhouette(w,size){size=size||150;var p=Math.max(0,Math.min(1,(w-4)/36));
-  return '<svg viewBox="0 0 120 150" style="width:'+size+'px;height:'+Math.round(size*150/120)+'px;display:block">'
-    +'<defs><linearGradient id="bmpG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e7c29c"/><stop offset="1" stop-color="#c99a6f"/></linearGradient></defs>'
-    +'<path d="'+bumpBody(1)+'" fill="none" stroke="#c1a982" stroke-width="1.3" stroke-dasharray="2.5 4" opacity=".65"/>'
-    +'<circle cx="50" cy="18" r="12" fill="none" stroke="#c1a982" stroke-width="1.3" stroke-dasharray="2.5 4" opacity=".65"/>'
-    +'<path d="'+bumpBody(p)+'" fill="url(#bmpG)" stroke="#a97e50" stroke-width="1.6" stroke-linejoin="round"/>'
-    +'<circle cx="50" cy="18" r="12" fill="url(#bmpG)" stroke="#a97e50" stroke-width="1.6"/>'
+  var B=(82+44*p).toFixed(1);
+  bumpSilhouette._n=(bumpSilhouette._n||0)+1;var u='b'+bumpSilhouette._n;
+  var body='M56 166 L56 94 C56 61 55 43 66 39 C74 36 79 43 78 53 C77 62 72 67 73 75 C75 91 '+B+' 94 '+B+' 118 C'+B+' 139 96 155 84 163 C77 167 61 169 56 166 Z';
+  return '<svg viewBox="0 0 160 180" style="width:'+size+'px;height:'+Math.round(size*180/160)+'px;display:block">'
+    +'<defs>'
+    +'<radialGradient id="'+u+'g" cx="52%" cy="46%" r="60%"><stop offset="0" stop-color="#f6ecd8" stop-opacity=".85"/><stop offset="1" stop-color="#f6ecd8" stop-opacity="0"/></radialGradient>'
+    +'<linearGradient id="'+u+'s" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#e2c69f"/><stop offset="55%" stop-color="#c9a276"/><stop offset="1" stop-color="#a9855c"/></linearGradient>'
+    +'<linearGradient id="'+u+'d" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#8c6a45" stop-opacity="0"/><stop offset="1" stop-color="#75593a" stop-opacity=".24"/></linearGradient>'
+    +'</defs>'
+    +'<circle cx="82" cy="84" r="72" fill="url(#'+u+'g)"/>'
+    +'<path d="M56 166 L56 94 C56 61 55 43 66 39 C74 36 79 43 78 53 C77 62 72 67 73 75 C75 91 122 94 122 118 C122 139 96 155 84 163" fill="none" stroke="#c1a67f" stroke-width="1.3" stroke-dasharray="2.5 5" opacity=".55" stroke-linecap="round"/>'
+    +'<path d="'+body+'" fill="url(#'+u+'s)" stroke="#8a6c4a" stroke-width="1.5" stroke-linejoin="round"/>'
+    +'<path d="'+body+'" fill="url(#'+u+'d)"/>'
+    +'<circle cx="66" cy="22" r="13" fill="url(#'+u+'s)" stroke="#8a6c4a" stroke-width="1.5"/>'
+    +'<ellipse cx="'+(B*0.82).toFixed(0)+'" cy="106" rx="11" ry="15" fill="#e9dcc4" opacity=".3"/>'
     +'</svg>';}
 function vHome(){
   var g=daysToGo(),w=week(),b=babyData(),ts=todayState();
@@ -804,6 +813,21 @@ function vHome(){
   // this week's focus (clickable → detail)
   var focus=weeklyFocus(w);
   var foc='<div class="card" onclick="openWeekFocus()"><div class="row"><div class="chip rs"><svg viewBox="0 0 24 24"><use href="#ic-sun"/></svg></div><div class="tx"><b>This week\'s focus</b><small>'+focus+'</small></div>'+chev+'</div></div>';
+  // stock-up nudge — pulled from the planned baby checklist, tap to tick off in Shopping
+  var stockCard='';
+  if(S.phase!=='born'){
+    var shopAll=[];BABYSHOP.forEach(function(g){g.items.forEach(function(it){shopAll.push({id:g.c+'|'+it.n,n:it.n,qty:it.qty,wk:it.wk});});});
+    var dueBuys=shopAll.filter(function(it){return !((S.shop2||{})[it.id])&&it.wk&&it.wk<=w+4&&it.wk>=w-2;}).sort(function(a,b){return a.wk-b.wk;});
+    stockCard='<div class="card" onclick="go(\'shop\')"><div class="row" style="justify-content:space-between"><div class="hd" style="margin:0">Stock up this week</div>'+chev+'</div>';
+    if(dueBuys.length){
+      stockCard+='<div style="font-size:12.5px;color:var(--muted);font-weight:500;margin:3px 0 11px">Planned buys, spread out so nothing piles up at the end — tick them off as you get them</div>';
+      dueBuys.slice(0,3).forEach(function(it){stockCard+='<div class="row" style="padding:9px 0;border-top:1px solid var(--line2)"><span style="width:7px;height:7px;border-radius:50%;background:var(--accent);flex:none"></span><div class="tx" style="font-weight:500;font-size:14px">'+esc(it.n)+(it.qty?' <span style="color:var(--muted);font-weight:400">· '+esc(it.qty)+'</span>':'')+'<small style="color:var(--faint)">good to have by week '+it.wk+'</small></div></div>';});
+      stockCard+='<div style="margin-top:12px;font-size:11.5px;font-weight:700;letter-spacing:.5px;color:var(--accent-d);text-transform:uppercase">Open the full checklist ›</div>';
+    } else {
+      stockCard+='<div style="font-size:13px;color:var(--muted);font-weight:500;margin-top:4px">Nothing urgent yet — the bigger buys start around week 24. I\'ll line them up here so you can stock up gradually 💛</div>';
+    }
+    stockCard+='</div>';
+  }
   // partner note
   var dad=DAD[(daysPreg()||0)%DAD.length];
   var pnote='<div class="card" onclick="openForYou()"><div class="row"><div class="chip bt"><svg viewBox="0 0 24 24"><use href="#ic-heart"/></svg></div><div class="tx">For '+esc(dadLabel())+'<small>'+dad+'</small></div>'+chev+'</div></div>';
@@ -816,10 +840,22 @@ function vHome(){
   // today — mood + check-in merged into one daily card
   var symp=(ts.symptom||'').trim(),conc=(ts.concern||'').trim();
   var moodBtns=['rough','meh','okay','good','great'].map(function(m,i){var e=['😣','😕','🙂','😊','🥰'][i];return '<button class="'+(ts.mood===m?'on':'')+'" onclick="setMood(\''+m+'\')">'+e+'</button>';}).join('');
+  // quick symptom tracker — the tap-to-cycle function, right here on Home
+  var sday=sympDay(ymd(today()));
+  var quickSy=['Nausea','Fatigue','Headaches','Back pain','Cramping','Heartburn','Bloating','Swelling','Dizziness','Trouble sleeping'];
+  var syCount=Object.keys(sday.items||{}).length;
+  var syChips=quickSy.map(function(s){var sev=sday.items[s]||0,col=SEVCOL[sev];
+    return '<span onclick="cycleSym(\''+s.replace(/'/g,"\\'")+'\')" style="display:inline-flex;align-items:center;gap:5px;padding:8px 12px;border-radius:16px;font-size:12.5px;font-weight:600;border:1.5px solid '+(sev?'transparent':'var(--line)')+';background:'+(sev?col:'var(--card)')+';color:'+(sev?'#3a2f26':'var(--ink2)')+'">'+esc(s)+(sev?' · '+SEVLBL[sev]:'')+'</span>';}).join('');
+  var sympBlock='<div class="divider"></div>'
+    +'<div class="row" style="justify-content:space-between"><div class="hd" style="margin:0;font-size:15px">How\'s your body?</div>'+(syCount?'<span style="font-size:12px;font-weight:700;color:var(--accent-d)">'+syCount+' logged</span>':'')+'</div>'
+    +'<div style="font-size:12px;color:var(--muted);font-weight:500;margin:3px 0 11px">Tap a symptom — again for moderate, then severe</div>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:8px">'+syChips+'</div>'
+    +'<div onclick="go(\'symptoms\')" style="margin-top:13px;font-size:11.5px;font-weight:700;letter-spacing:.5px;color:var(--accent-d);text-transform:uppercase;cursor:pointer">All symptoms &amp; this week\'s pattern ›</div>';
   var checkin='<div class="card">'
     +'<div class="hd" style="margin-bottom:2px">How are you today?</div>'
     +'<small style="font-size:12px;color:var(--muted);font-weight:500">'+(ts.mood?'Feeling '+ts.mood+' today':'Tap how you\'re feeling')+'</small>'
     +'<div class="moodpick" style="margin-top:11px">'+moodBtns+'</div>'
+    +sympBlock
     +'<div class="divider"></div>'
     +'<div onclick="openCheckin()"><div class="row"><div class="chip rs"><svg viewBox="0 0 24 24"><use href="#ic-mood" stroke="#7d6252"/></svg></div><div class="tx">Today\'s check-in<small>'+((symp||conc)?'Tap to view or edit today\'s note':'How\'s your body? Anything on your mind?')+'</small></div>'+((symp||conc)?'<span class="pill" style="background:var(--card2);color:var(--accent-d)">Edit</span>':chev)+'</div>';
   if(symp)checkin+='<div style="margin-top:13px"><div style="font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--faint)">Your body</div><div style="font-size:13.5px;color:var(--ink2);font-weight:500;line-height:1.55;margin-top:4px">'+esc(symp)+'</div></div>';
@@ -838,7 +874,7 @@ function vHome(){
   if(S.phase!=='born'){bumpCard='<div class="card" style="text-align:center"><div style="font-size:10.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent)">Your bump · week '+w+'</div>'
     +'<div style="display:flex;justify-content:center;margin:12px 0 6px">'+bumpSilhouette(w,138)+'</div>'
     +'<div style="font-size:12.5px;color:var(--muted);font-weight:500;line-height:1.5">A little rounder each week — the dotted outline is full term 💛</div></div>';}
-  return head+hero+tiles+bumpCard+bumpRem+streakCard+tl+waterSec+moodSec+checkin+lesson+foc+pnote+verse;
+  return head+hero+tiles+bumpCard+bumpRem+tl+waterSec+moodSec+checkin+lesson+foc+stockCard+pnote+verse;
 }
 function openBabyWeek(){var w=week()||6;var b=W[Math.min(40,Math.max(4,w))];var devs=devFor(w)||[];
   var h='<div style="font-size:10.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--accent);margin-bottom:6px">Your baby · week '+w+'</div>';
@@ -996,31 +1032,7 @@ function vBaby(){
   } else {
     out+='<div class="card"><div class="row"><div class="chip pk"><svg viewBox="0 0 24 24"><use href="#ic-foot" stroke="#7d6252"/></svg></div><div class="tx">Movements come later<small>Most mamas feel the first flutters around week 16–22. Your kick counter unlocks then 💛</small></div></div></div>';
   }
-  // scans & appointments — with countdowns
-  var appts=S.appts||[];
-  out+='<div class="sec-label">Scans & appointments</div>';
-  var ups=[];appts.forEach(function(a){if(a.next){var nd=new Date(a.next+'T00:00:00');if(nd>=today())ups.push(a.next);}});
-  ups.sort();
-  if(ups.length){var nd=new Date(ups[0]+'T00:00:00');var dd=Math.round((nd-today())/DAY);
-    out+='<div class="hero" style="padding:18px 20px;margin-bottom:13px"><div class="wk">Your next appointment</div><div class="big" style="font-size:22px;margin-top:6px">'+countdown(dd)+'</div><div class="sub">'+nd.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})+'</div></div>';}
-  // suggested upcoming scans from the standard schedule
-  if(S.phase!=='born'){
-    var upco=SCANS.map(function(s){return {s:s,d:scanTargetDate(s.wk)};}).filter(function(x){return x.d&&x.d>=today();}).sort(function(a,b){return a.d-b.d;}).slice(0,2);
-    if(upco.length){out+='<div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--faint);margin:2px 2px 9px">Coming up</div>';
-      upco.forEach(function(x){var dd2=Math.round((x.d-today())/DAY);
-        out+='<div class="card"><div class="row"><div class="chip lv"><svg viewBox="0 0 24 24"><use href="#ic-cal"/></svg></div><div class="tx"><b>'+esc(x.s.type)+'</b><small>'+esc(x.s.note)+'</small><small style="color:var(--accent-d);font-weight:700;margin-top:5px">'+countdown(dd2)+' · around week '+x.s.wk+'</small></div></div></div>';});
-    }
-  }
-  out+='<button class="btn" onclick="openAppt()" style="margin:2px 0 14px">Log an appointment</button>';
-  if(appts.length){var tone={'Scan':'lv','Check-up':'sg','Bloods':'rs','Other':'bt'};
-    appts.slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'')}).forEach(function(a){
-      var d=a.date?new Date(a.date+'T00:00:00'):null;
-      out+='<div class="card"><div class="row" style="align-items:flex-start"><div class="chip '+(tone[a.type]||'bt')+'"><svg viewBox="0 0 24 24"><use href="#ic-cal"/></svg></div><div class="tx"><span class="pill" style="background:var(--card2);color:var(--accent-d)">'+esc(a.type)+'</span>'
-        +'<small style="margin-top:7px">'+(d?d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}):'')+'</small>'
-        +(a.notes?'<small style="margin-top:5px;color:var(--ink2)">'+esc(a.notes)+'</small>':'')
-        +(a.next?'<small style="margin-top:6px;color:var(--accent-d);font-weight:700;letter-spacing:.3px">Next: '+new Date(a.next+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'})+'</small>':'')
-        +'</div><button onclick="event.stopPropagation();delAppt(\''+a.id+'\')" style="color:var(--faint);font-size:20px;padding:0 4px;align-self:flex-start">×</button></div></div>';
-    });}
+  // (scans & appointments logging moved to the Calendar tab)
   // scan & sonar gallery
   var scans=(S.photos||[]).filter(function(p){return p.kind==='scan';}).sort(function(a,b){return (b.date||'').localeCompare(a.date||'')});
   out+='<div class="sec-label">Scan & sonar photos</div>';
@@ -1549,17 +1561,51 @@ function vCalendar(){
   var out=statusBar()+'<div class="greet"><div class="g1">Calendar</div><div class="g2">Tap a day to add anything</div></div>';
   out+='<div class="card"><div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px"><button onclick="calShift(-1)" style="font-size:24px;color:var(--accent-d);padding:2px 12px">‹</button><div style="font-family:var(--serif);font-size:18px;color:var(--ink)">'+cur.toLocaleDateString(undefined,{month:'long',year:'numeric'})+'</div><button onclick="calShift(1)" style="font-size:24px;color:var(--accent-d);padding:2px 12px">›</button></div>';
   out+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;font-size:10px;font-weight:700;color:var(--faint);margin-bottom:6px">'+['S','M','T','W','T','F','S'].map(function(d){return '<div>'+d+'</div>';}).join('')+'</div>';
+  var dueD=due();
+  function pregDayOn(dt){if(!dueD)return null;return 280-Math.round((dueD-dt)/DAY);}
   out+='<div style="display:grid;grid-template-columns:repeat(7,1fr);gap:3px">';
   for(var i=0;i<startDow;i++)out+='<div></div>';
   for(var day=1;day<=dim;day++){
     var ds=y+'-'+String(m+1).padStart(2,'0')+'-'+String(day).padStart(2,'0');
+    var dObj=new Date(y,m,day);
     var isToday=ds===ymd(today());var mk=marks[ds];
-    var dots='';if(mk){var seen={};mk.slice(0,3).forEach(function(x){dots+='<span style="width:5px;height:5px;border-radius:50%;background:'+(isToday?'#f3ede3':x.color)+'"></span>';});}
-    out+='<div onclick="calDay(\''+ds+'\')" style="aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;'+(isToday?'background:var(--espresso);':(mk?'background:var(--card2);':''))+'font-size:13px;font-weight:'+(isToday||mk?700:500)+';color:'+(isToday?'#f3ede3':'var(--ink2)')+'">'+day+(mk?'<span style="display:flex;gap:2px;margin-top:2px">'+dots+'</span>':'')+'</div>';
+    var pd=pregDayOn(dObj);var isPast=dObj<today();
+    var wkNo=(pd!==null&&pd>=7&&pd<=294&&pd%7===0)?(pd/7):0;
+    var bg=isToday?'var(--espresso)':(mk?'var(--card2)':((isPast&&pd!==null&&pd>=0)?'rgba(183,131,94,.10)':''));
+    var txt=isToday?'#f3ede3':((isPast&&!mk)?'var(--faint)':'var(--ink2)');
+    var dots='';if(mk){mk.slice(0,3).forEach(function(x){dots+='<span style="width:5px;height:5px;border-radius:50%;background:'+(isToday?'#f3ede3':x.color)+'"></span>';});}
+    var wkLab=wkNo?'<span style="font-size:8px;line-height:1;font-weight:700;letter-spacing:.1px;color:'+(isToday?'#e6d9c4':'var(--accent-d)')+'">wk '+wkNo+'</span>':'';
+    out+='<div onclick="calDay(\''+ds+'\')" style="position:relative;aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:10px;background:'+bg+';font-size:13px;font-weight:'+(isToday||mk?700:500)+';color:'+txt+'">'+wkLab+'<span style="line-height:1.05">'+day+'</span>'+(mk?'<span style="display:flex;gap:2px;margin-top:1px">'+dots+'</span>':'')+'</div>';
   }
-  out+='</div></div>';
+  out+='</div>';
+  out+='<div style="display:flex;flex-wrap:wrap;gap:9px 15px;margin-top:13px;font-size:11px;font-weight:600;color:var(--muted)"><span style="display:flex;align-items:center;gap:6px"><span style="width:13px;height:13px;border-radius:50%;background:var(--espresso)"></span>Today</span><span style="display:flex;align-items:center;gap:6px"><span style="width:13px;height:13px;border-radius:4px;background:rgba(183,131,94,.10)"></span>Days passed</span><span style="display:flex;align-items:center;gap:6px"><span style="font-size:9px;font-weight:700;color:var(--accent-d)">wk</span>New pregnancy week</span></div>';
+  out+='</div>';
   // colour legend
   out+='<div class="card" style="padding:14px 16px"><div style="font-size:10.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--faint);margin-bottom:10px">Colour key</div><div style="display:flex;flex-wrap:wrap;gap:12px 16px">'+CALTYPES.concat(['Due date']).map(function(t){var c=t==='Due date'?calColor('due'):calColor(t);return '<span style="display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--ink2)"><span style="width:11px;height:11px;border-radius:50%;background:'+c+'"></span>'+t+'</span>';}).join('')+'</div></div>';
+  // scans & appointments — logging lives here now
+  var appts=S.appts||[];
+  out+='<div class="sec-label">Scans &amp; appointments</div>';
+  var aups=[];appts.forEach(function(a){if(a.next){var nd=new Date(a.next+'T00:00:00');if(nd>=today())aups.push(a.next);}});
+  aups.sort();
+  if(aups.length){var nd=new Date(aups[0]+'T00:00:00');var ndd=Math.round((nd-today())/DAY);
+    out+='<div class="hero" style="padding:18px 20px;margin-bottom:13px"><div class="wk">Your next appointment</div><div class="big" style="font-size:22px;margin-top:6px">'+countdown(ndd)+'</div><div class="sub">'+nd.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})+'</div></div>';}
+  if(S.phase!=='born'){
+    var upco=SCANS.map(function(s){return {s:s,d:scanTargetDate(s.wk)};}).filter(function(x){return x.d&&x.d>=today();}).sort(function(a,b){return a.d-b.d;}).slice(0,2);
+    if(upco.length){out+='<div style="font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--faint);margin:2px 2px 9px">Suggested scans</div>';
+      upco.forEach(function(x){var dd2=Math.round((x.d-today())/DAY);
+        out+='<div class="card"><div class="row"><div class="chip lv"><svg viewBox="0 0 24 24"><use href="#ic-cal"/></svg></div><div class="tx"><b>'+esc(x.s.type)+'</b><small>'+esc(x.s.note)+'</small><small style="color:var(--accent-d);font-weight:700;margin-top:5px">'+countdown(dd2)+' · around week '+x.s.wk+'</small></div></div></div>';});
+    }
+  }
+  out+='<button class="btn" onclick="openAppt()" style="margin:2px 0 14px">Log an appointment</button>';
+  if(appts.length){var tone={'Scan':'lv','Check-up':'sg','Bloods':'rs','Other':'bt'};
+    appts.slice().sort(function(a,b){return (b.date||'').localeCompare(a.date||'')}).forEach(function(a){
+      var d=a.date?new Date(a.date+'T00:00:00'):null;
+      out+='<div class="card"><div class="row" style="align-items:flex-start"><div class="chip '+(tone[a.type]||'bt')+'"><svg viewBox="0 0 24 24"><use href="#ic-cal"/></svg></div><div class="tx"><span class="pill" style="background:var(--card2);color:var(--accent-d)">'+esc(a.type)+'</span>'
+        +'<small style="margin-top:7px">'+(d?d.toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'}):'')+'</small>'
+        +(a.notes?'<small style="margin-top:5px;color:var(--ink2)">'+esc(a.notes)+'</small>':'')
+        +(a.next?'<small style="margin-top:6px;color:var(--accent-d);font-weight:700;letter-spacing:.3px">Next: '+new Date(a.next+'T00:00:00').toLocaleDateString(undefined,{month:'short',day:'numeric'})+'</small>':'')
+        +'</div><button onclick="event.stopPropagation();delAppt(\''+a.id+'\')" style="color:var(--faint);font-size:20px;padding:0 4px;align-self:flex-start">×</button></div></div>';
+    });}
   var up=[];Object.keys(marks).forEach(function(ds){var d=new Date(ds+'T00:00:00');if(d>=today())marks[ds].forEach(function(mk){up.push({d:d,mk:mk});});});
   up.sort(function(a,b){return a.d-b.d;});
   out+='<div class="sec-label">Coming up</div>';
@@ -1969,7 +2015,8 @@ function verseOfDay(){return VERSES[dayOfYear()%VERSES.length];}
 /* ---------------- Plan: events + projects ---------------- */
 // in chronological pregnancy order — earliest first, birth last
 var EVENTS=[
- {id:'announcement',name:'Pregnancy announcement',icon:'ic-heart',tone:'rs',wk:12,guide:'Whenever you\'re ready — many share after the 12-week scan.',items:['Decide who to tell first, in person','Pick a date to go public','Plan the photo or wording','Tell close family & friends first','Post it or send it','Soak up the lovely messages 💛']},
+ {id:'announcement_shoot',name:'Announcement shoot',icon:'ic-camera',tone:'lv',wk:10,guide:'Do this first — a little shoot to capture the news, then announce it. Anytime after your first scan.',items:['Find & book a photographer (or plan a DIY shoot)','Pick a location','Decide outfits & a colour theme','Gather props — a sign, the scan photo, tiny shoes','Confirm the date & timing','Make a quick shot list','Choose your favourite shots to share']},
+ {id:'announcement',name:'Pregnancy announcement',icon:'ic-heart',tone:'rs',wk:12,guide:'After your shoot — share whenever you\'re ready, many wait until the 12-week scan.',items:['Decide who to tell first, in person','Pick a date to go public','Choose your shoot photo or wording','Tell close family & friends first','Post it or send it','Soak up the lovely messages 💛']},
  {id:'gender_reveal',name:'Gender reveal',icon:'ic-sparkle',tone:'pk',wk:18,guide:'Usually around 16–20 weeks, after your anatomy scan.',items:['Confirm the gender at your scan','Pick a date & time','Decide who hosts and where','Choose the reveal method','Invite family & close friends','Order or prep the reveal item','Plan a few photos']},
  {id:'gender_reveal_shoot',name:'Gender reveal shoot',icon:'ic-camera',tone:'lv',wk:18,guide:'Pair it with your reveal day if you can — book the photographer early.',items:['Find & book a photographer','Pick a location','Decide outfits & colour theme','Gather props (smoke, balloons, board)','Confirm date & timing','Create a shot list','Plan how you\'ll share the photos']},
  {id:'nursery',name:'Baby\'s nursery',icon:'ic-home',tone:'sg',wk:24,guide:'Weeks 20–30 are a comfy time to start — no rush.',items:['Choose a theme & colours','Paint (low-VOC, well ventilated)','Build the cot','Set up the changing station','Sort storage & shelves','Wash & put away baby clothes','Add blackout curtains','Stock nappies & wipes']},
